@@ -1,7 +1,7 @@
 package Controladores;
 
-import Entidades.Usuario;
-import Logica.logicaUsuario;
+import Entidades.*;
+import Logica.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,10 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
+@WebServlet(name = "RegistroEmpresaServlet", urlPatterns = {"/RegistroEmpresaServlet"})
 public class RegistroEmpresaServlet extends HttpServlet {
     
-    private logicaUsuario logicaU = new logicaUsuario();
+    private logicaEmpresa logicaE = new logicaEmpresa();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,16 +28,16 @@ public class RegistroEmpresaServlet extends HttpServlet {
         
         response.setContentType("application/json; charset=UTF-8");
         
-        Usuario recibido = om.readValue(request.getInputStream(), Usuario.class);
+        Empresa recibido = om.readValue(request.getInputStream(), Empresa.class);
         
         
-        Usuario nuevo = logicaU.registrar(recibido);
+        Empresa nueva = logicaE.registrar(recibido);
         
-        if (nuevo == null) {
+        if (nueva == null) {
             
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\"Error al intentar registrar usuario\"}");
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\"Error al intentar registrar empresa\"}");
         } else {
-            String json = om.writeValueAsString(nuevo);
+            String json = om.writeValueAsString(nueva);
             response.getWriter().print(json);
         }
     }

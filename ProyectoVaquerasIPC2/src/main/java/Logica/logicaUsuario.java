@@ -19,6 +19,9 @@ public class logicaUsuario {
             
         } else if (nuevo.getTipo_usuario().equals(TipoUsuarioENUM.USUARIO_COMUN)) {
             return usuarioDAO.registrarUsuario(nuevo);
+            
+        }else if (nuevo.getTipo_usuario().equals(TipoUsuarioENUM.EMPRESARIO)) {
+            return usuarioDAO.registrarEmpresario(nuevo);
         }
         return null;
     }
