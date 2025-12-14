@@ -42,4 +42,21 @@ public class EmpresaDAO extends DAO{
 
         return null;
     }
+    
+    public boolean cambiarComisionEspecifica(double comision, String empresa){
+    
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "UPDATE empresa SET comision = ? WHERE nombre_empresa = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setDouble(1, comision);
+            stm.setString(2, empresa);
+            
+            stm.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("ERROR AL CAMBIAR COMISION ESPECIFICA PARA "+empresa+"\n" + e.getMessage());
+        }
+        return false;
+    }
 }
