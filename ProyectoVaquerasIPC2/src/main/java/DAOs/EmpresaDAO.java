@@ -132,4 +132,49 @@ public class EmpresaDAO extends DAO {
         
     }
     
+    public boolean cambiarVisibilidadComentariosEmpresa(String nombre_empresa) {
+
+        try (Connection conn = conexion.conectar()) {
+
+            //cambia el estado de visible si es true lo vuelve false y al reves
+            String sql = "UPDATE comentario INNER JOIN juego ON comentario.titulo = juego.titulo "
+                    + "SET comentario.visible = NOT comentario.visible WHERE juego.nombre_empresa = ?";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, nombre_empresa);
+
+
+            stm.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR AL CAMBIAR VISIBILIDAD DE LOS COMENTARIOS DE LA EMPRESA " + nombre_empresa + e.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean editarInformacion(String titulo, String descripcion, double precio) {
+
+        try (Connection conn = conexion.conectar()) {
+
+            //cambia el estado de visible si es true lo vuelve false y al reves
+            String sql = " UPDATE juego SET descripcion = ? , precio = ? WHERE titulo = ? ";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, descripcion);
+            stm.setDouble(2, precio);
+            stm.setString(3, titulo);
+
+
+            stm.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR AL EDITAR INFORMACION DEL JUEGO" + titulo + e.getMessage());
+        }
+        return false;
+    }
+    
 }

@@ -39,4 +39,16 @@ public class LogicaEmpresa {
         empresaDAO.cambiarCategoriaJuego(juego, nueva, vieja);
         
     }
+    
+    public boolean desactivarActivarComenatrio(String empresa){
+    
+        return empresaDAO.cambiarVisibilidadComentariosEmpresa(empresa);
+        
+    }
+    
+    public boolean editarInformacion(String titulo, String descripcion, double precio){
+    
+        return empresaDAO.editarInformacion(titulo, descripcion, precio);
+        
+    }
 }

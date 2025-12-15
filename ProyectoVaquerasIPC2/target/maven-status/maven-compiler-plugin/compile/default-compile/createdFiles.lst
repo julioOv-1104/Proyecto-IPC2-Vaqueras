@@ -7,6 +7,7 @@ DAOs\DAO.class
 Entidades\Empresa.class
 Logica\LogicaJuego.class
 paquete\proyectovaquerasipc2\JakartaRestConfiguration.class
+Controladores\EmpresaServlet.class
 Controladores\UsuarioServlet.class
 Utilidades\TipoClasificacion.class
 Controladores\AdminServlet.class

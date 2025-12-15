@@ -47,7 +47,7 @@ public class JuegoDAO extends DAO {
 
         try (Connection conn = conexion.conectar()) {
 
-            //Se crea el juego en la DB
+            //Se asegura que no existan dos filas con la misma informacion
             String sql = "SELECT 1 FROM juego_categoria WHERE titulo = ? AND nombre_categoria = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, titulo);
@@ -73,7 +73,7 @@ public class JuegoDAO extends DAO {
 
             if (!buscarCategoriaDuplicada(titulo, categoria)) {
 
-                //Se crea el juego en la DB
+                //Se agrega la categoria
                 String sql = "INSERT INTO juego_categoria (titulo, nombre_categoria) VALUES (?,?)";
                 PreparedStatement stm = conn.prepareStatement(sql);
                 stm.setString(1, titulo);
@@ -89,4 +89,77 @@ public class JuegoDAO extends DAO {
         return false;
     }
 
+    public boolean agregarRecursosMinimos(String titulo, String[] valor) {
+
+        try (Connection conn = conexion.conectar()) {
+
+            //Se agrega el recurso
+            String sql = "INSERT INTO juego_recurso (titulo, nombre_recurso, valor) VALUES (?,'almacenamiento',?), "
+                    + "(?,'memoria RAM',?), (?,'procesador',?), (?,'sistema operativo',?)";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, titulo);
+            stm.setString(2, valor[0]);
+
+            stm.setString(3, titulo);
+            stm.setString(4, valor[1]);
+
+            stm.setString(5, titulo);
+            stm.setString(6, valor[2]);
+
+            stm.setString(7, titulo);
+            stm.setString(8, valor[3]);
+
+            stm.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR AL AGREGAR RECURSOS AL JUEGO " + titulo + e.getMessage());
+        }
+        return false;
+    }
+
+     public boolean cambiarVisibilidadJuego(String titulo) {
+
+        try (Connection conn = conexion.conectar()) {
+
+            //cambia el estado de habilitado si es true lo vuelve false y al reves
+            String sql = "UPDATE juego SET habilitado = NOT habilitado WHERE titulo = ?";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, titulo);
+
+
+            stm.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR AL CAMBIAR VISIBILIDAD DEL JUEGO " + titulo + e.getMessage());
+        }
+        return false;
+    }
+    
+     
+     public boolean cambiarVisibilidadComentario(String titulo) {
+
+        try (Connection conn = conexion.conectar()) {
+
+            //cambia el estado de habilitado si es true lo vuelve false y al reves
+            String sql = "UPDATE comentario SET visible = NOT visible WHERE titulo = ?";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, titulo);
+
+
+            stm.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR AL CAMBIAR VISIBILIDAD DEL COMENTARIO DEL JUEGO " + titulo + e.getMessage());
+        }
+        return false;
+    }
 }
