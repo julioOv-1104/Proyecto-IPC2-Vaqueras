@@ -3,7 +3,7 @@ package Entidades;
 import Utilidades.TipoUsuarioENUM;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.Date;
+import java.sql.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Usuario {

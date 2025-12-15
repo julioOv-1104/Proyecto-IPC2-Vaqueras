@@ -1,4 +1,3 @@
-
 package Controladores;
 
 import Logica.*;
@@ -11,32 +10,30 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-
-
 @WebServlet(name = "EmpresaServlet", urlPatterns = {"/EmpresaServlet"})
 public class EmpresaServlet extends HttpServlet {
-    
+
     private LogicaEmpresa logicaE = new LogicaEmpresa();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
-  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         ObjectMapper om = new ObjectMapper();
+
+        ObjectMapper om = new ObjectMapper();
 
         response.setContentType("application/json; charset=UTF-8");
-        
+
         try {
 
             Map<String, Object> datos = om.readValue(request.getInputStream(), Map.class);
 
+            //Se envia el nombre de la empresa que quiere desactivar los somentarios
             String empresa = (String) datos.get("nombre_empresa");
 
             boolean todoBien = logicaE.desactivarActivarComenatrio(empresa);
@@ -54,22 +51,22 @@ public class EmpresaServlet extends HttpServlet {
 
             System.out.println("ERROR AL CAMBIAR VISIBILIDAD de los comentarios de la empresa" + e.getMessage());
         }
-        
-        
+
     }
-    
+
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         ObjectMapper om = new ObjectMapper();
+
+        ObjectMapper om = new ObjectMapper();
 
         response.setContentType("application/json; charset=UTF-8");
-        
+
         try {
 
             Map<String, Object> datos = om.readValue(request.getInputStream(), Map.class);
 
+            //Son los campos que el empresario puede editar de un juego
             String titulo = (String) datos.get("titulo");
             String descripcion = (String) datos.get("descripcion");
             double precio = Double.parseDouble(datos.get("precio").toString());
@@ -88,13 +85,44 @@ public class EmpresaServlet extends HttpServlet {
         } catch (Exception e) {
 
             System.out.println("ERROR AL EDITAR INFORMACION" + e.getMessage());
+            response.getWriter().print("{\"mensaje\":\"Error al intentar editar informacion del juego\"}");
         }
-        
-        
     }
-    
 
-   
+    @Override
+    public void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        ObjectMapper om = new ObjectMapper();
+        response.setContentType("application/json; charset=UTF-8");
+
+        try {
+            // Se obtiene el correo del empresario que se va a eliminar
+            String correo = request.getParameter("correo");
+
+            if (correo == null) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().print("{\"error\": \"Falta el correo del usuario\"}");
+                return;
+            }
+
+            boolean eliminado = logicaE.eliminarEmpresario(correo);
+
+            if (eliminado) {
+                response.setStatus(HttpServletResponse.SC_OK); // O SC_NO_CONTENT (204)
+                response.getWriter().print("{\"mensaje\": \"Usuario eliminado con éxito\"}");
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 404
+                response.getWriter().print("{\"error\": \"No se encontró el usuario\"}");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";

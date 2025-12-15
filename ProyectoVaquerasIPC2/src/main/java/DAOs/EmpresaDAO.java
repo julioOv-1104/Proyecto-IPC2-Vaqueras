@@ -4,6 +4,7 @@ import Entidades.*;
 import Utilidades.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EmpresaDAO extends DAO {
@@ -36,6 +37,27 @@ public class EmpresaDAO extends DAO {
         }
 
         return null;
+    }
+    
+    public double obtenerComision(String titulo) {
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT empresa.comision, juego.precio FROM empresa "
+                    + "INNER JOIN juego ON empresa.nombre_empresa = juego.nombre_empresa WHERE juego.titulo = ?;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, titulo);
+
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("empresa.comision");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("ERROR AL OBTENER PRECIO DEL JUEGO " + e.getMessage());
+        }
+        return 0;
     }
     
     private void actualizarComisionGlobal(double comision){
@@ -173,6 +195,35 @@ public class EmpresaDAO extends DAO {
 
         } catch (SQLException e) {
             System.out.println("ERROR AL EDITAR INFORMACION DEL JUEGO" + titulo + e.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean eliminarEmpresario(String correo) {
+
+        try (Connection conn = conexion.conectar()) {
+
+            //elimina al usuario de la tabla "empresario"
+            String sql = " DELETE FROM empresario WHERE correo_usuario = ?";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, correo);
+            
+            //lo elimina tambien de la tabla "usuario"
+            String sql2 = " DELETE FROM usuario WHERE correo_usuario = ?";
+
+            PreparedStatement stm2 = conn.prepareStatement(sql2);
+            stm2.setString(1, correo);
+            
+
+
+            stm.executeUpdate();
+            stm2.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR AL ELIMNAR EMPRESARIO " + correo + e.getMessage());
         }
         return false;
     }
