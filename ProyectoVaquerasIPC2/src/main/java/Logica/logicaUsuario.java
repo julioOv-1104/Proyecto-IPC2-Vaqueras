@@ -4,9 +4,9 @@ import DAOs.UsuarioDAO;
 import Entidades.Usuario;
 import Utilidades.TipoUsuarioENUM;
 
-public class logicaUsuario {
+public class LogicaUsuario {
 
-    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private  UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     public Usuario login(String correo_usuario, String contrasenna) {
         return usuarioDAO.login(correo_usuario, contrasenna);

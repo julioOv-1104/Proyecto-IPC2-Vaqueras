@@ -2,7 +2,7 @@
 package Controladores;
 
 import Entidades.Usuario;
-import Logica.logicaUsuario;
+import Logica.LogicaUsuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
     
-    private logicaUsuario logicaU = new logicaUsuario();
+    private LogicaUsuario logicaU = new LogicaUsuario();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

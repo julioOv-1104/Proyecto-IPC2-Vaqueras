@@ -1,7 +1,7 @@
 package Controladores;
 
 import Entidades.Usuario;
-import Logica.logicaUsuario;
+import Logica.LogicaUsuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
 public class RegistroServlet extends HttpServlet {
     
-    private logicaUsuario logicaU = new logicaUsuario();
+    private LogicaUsuario logicaU = new LogicaUsuario();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,6 +24,7 @@ public class RegistroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         ObjectMapper om = new ObjectMapper();
         
         response.setContentType("application/json; charset=UTF-8");

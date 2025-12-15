@@ -3,9 +3,9 @@ package Logica;
 import DAOs.*;
 import Entidades.*;
 
-public class logicaEmpresa {
+public class LogicaEmpresa {
 
-    private final EmpresaDAO empresaDAO = new EmpresaDAO();
+    private  EmpresaDAO empresaDAO = new EmpresaDAO();
 
 
 
@@ -17,10 +17,26 @@ public class logicaEmpresa {
     
         if (nuevaComision > empresaDAO.obtenerComisionGlobal()) {
             return false;
-            //cambia la comision a una especifica
+            
             
         }else{
         return empresaDAO.cambiarComisionEspecifica(nuevaComision, empresa);
         }
+    }
+    
+    public boolean actualizarComision(double nuevaComision){
+    
+        if (nuevaComision >0) {
+            return empresaDAO.cambiarComisionGlobalParaEmpresas(nuevaComision);
+        }else{
+        return false;
+        }
+        
+    }
+    
+    public void cambiarCategoriaJuego(String juego, String nueva, String vieja){
+    
+        empresaDAO.cambiarCategoriaJuego(juego, nueva, vieja);
+        
     }
 }

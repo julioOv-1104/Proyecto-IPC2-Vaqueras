@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "RegistroEmpresaServlet", urlPatterns = {"/RegistroEmpresaServlet"})
 public class RegistroEmpresaServlet extends HttpServlet {
     
-    private logicaEmpresa logicaE = new logicaEmpresa();
+    private LogicaEmpresa logicaE = new LogicaEmpresa();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
