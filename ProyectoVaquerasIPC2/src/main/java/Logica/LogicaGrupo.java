@@ -22,4 +22,16 @@ public class LogicaGrupo {
     
     }
     
+    public boolean SalirDeGrupo(int id, String correo){
+    
+        return grupoDao.salirDeGrupo(id, correo);
+    
+    }
+    
+    public boolean borrarGrupo(int id){
+    
+        return grupoDao.borrarYsacarGrupo(id);
+    
+    }
+    
 }
