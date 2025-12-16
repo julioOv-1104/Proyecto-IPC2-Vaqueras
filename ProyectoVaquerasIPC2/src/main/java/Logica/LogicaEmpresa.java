@@ -51,4 +51,11 @@ public class LogicaEmpresa {
         return empresaDAO.editarInformacion(titulo, descripcion, precio);
         
     }
+    
+     public boolean eliminarEmpresario(String correo){
+    
+        return empresaDAO.eliminarEmpresario(correo);
+        
+    }
+    
 }

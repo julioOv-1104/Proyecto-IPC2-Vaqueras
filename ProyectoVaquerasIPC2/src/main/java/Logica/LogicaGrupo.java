@@ -1,0 +1,25 @@
+
+package Logica;
+
+import DAOs.GrupoDAO;
+import Entidades.GrupoFamiliar;
+
+public class LogicaGrupo {
+    
+    GrupoDAO grupoDao = new GrupoDAO();
+    
+    public GrupoFamiliar crearGrupo(GrupoFamiliar nuevo){
+    
+        GrupoFamiliar creado = grupoDao.crearGrupoFamiliar(nuevo);
+       int id = grupoDao.obtenerIDgrupo(nuevo.getCorreo_encargado());//crea el grupo
+        grupoDao.unirseAgrupo(id, nuevo.getCorreo_encargado());//lo agrega al grupo
+        return creado;
+    }
+    
+    public boolean unirseAgrupo(int id, String correo){
+    
+        return grupoDao.unirseAgrupo(id, correo);
+    
+    }
+    
+}

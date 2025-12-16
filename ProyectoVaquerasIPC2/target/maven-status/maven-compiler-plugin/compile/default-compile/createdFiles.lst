@@ -6,9 +6,11 @@ DAOs\DAO.class
 Entidades\Empresa.class
 paquete\proyectovaquerasipc2\JakartaRestConfiguration.class
 Utilidades\TipoClasificacion.class
+Entidades\GrupoFamiliar.class
 Controladores\LoginServlet.class
 paquete\proyectovaquerasipc2\resources\JakartaEE10Resource.class
 Utilidades\TipoUsuarioENUM.class
+DAOs\GrupoDAO.class
 Controladores\RegistroEmpresaServlet.class
 DAOs\EmpresaDAO.class
 Controladores\RegistroServlet.class
@@ -17,8 +19,10 @@ Controladores\JuegoServlet.class
 DAOs\JuegoDAO.class
 Logica\LogicaJuego.class
 Controladores\EmpresaServlet.class
+Controladores\GrupoServlet.class
 Controladores\UsuarioServlet.class
 Controladores\CompraServlet.class
 Controladores\AdminServlet.class
 Entidades\Juego.class
 Utilidades\ConexionDB.class
+Logica\LogicaGrupo.class

@@ -1,12 +1,14 @@
 package Logica;
 
-import DAOs.UsuarioDAO;
+import DAOs.*;
 import Entidades.Usuario;
 import Utilidades.TipoUsuarioENUM;
+import java.sql.Date;
 
 public class LogicaUsuario {
 
     private  UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private GamerDAO gamerDao = new GamerDAO();
 
     public Usuario login(String correo_usuario, String contrasenna) {
         return usuarioDAO.login(correo_usuario, contrasenna);
@@ -24,5 +26,15 @@ public class LogicaUsuario {
             return usuarioDAO.registrarEmpresario(nuevo);
         }
         return null;
+    }
+    
+    public boolean recargarCarteraGamer(String correo,double recarga){
+     return gamerDao.recargarCartera(correo, recarga);
+     
+    }
+    
+    public boolean comprarJuego(String correo, String titulo, Date fecha_compra){
+        return gamerDao.comprarJuego(correo, titulo, fecha_compra);
+    
     }
 }

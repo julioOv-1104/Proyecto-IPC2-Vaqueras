@@ -1,6 +1,5 @@
 package Controladores;
 
-import Entidades.Usuario;
 import Logica.LogicaUsuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -18,7 +17,7 @@ import java.util.Map;
 public class CompraServlet extends HttpServlet {
 
     private LogicaUsuario logicaU = new LogicaUsuario();
-    private Gson gson = new Gson();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
