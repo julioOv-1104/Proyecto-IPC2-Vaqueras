@@ -35,7 +35,7 @@ public class GrupoDAO extends DAO {
 
         try (Connection conn = conexion.conectar()) {
 
-            int idGrupo = obtenerIDgrupo(nuevo.getCorreo_encargado());
+            
 
             //se asegura que no existan dos grupos con el mismo nombre pertenecientes al mismo usuario
             if (buscarPorParametros("grupo_familiar", "nombre", nuevo.getNombre())) {

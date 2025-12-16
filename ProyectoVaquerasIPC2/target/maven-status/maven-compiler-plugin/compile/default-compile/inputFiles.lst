@@ -9,6 +9,8 @@ C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoV
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Usuario.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\RegistroEmpresaServlet.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Logica\LogicaGrupo.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\OpinionServlet.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Logica\LogicaOpinion.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\GamerDAO.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\UsuarioDAO.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\RegistroServlet.java
@@ -22,6 +24,7 @@ C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoV
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Utilidades\TipoUsuarioENUM.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\AdminServlet.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\GrupoFamiliar.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\OpinionDAO.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Logica\LogicaJuego.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Logica\LogicaUsuario.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\GrupoServlet.java

@@ -1,3 +1,4 @@
+Logica\LogicaOpinion.class
 Logica\LogicaUsuario.class
 DAOs\UsuarioDAO.class
 Entidades\Usuario.class
@@ -8,6 +9,7 @@ paquete\proyectovaquerasipc2\JakartaRestConfiguration.class
 Utilidades\TipoClasificacion.class
 Entidades\GrupoFamiliar.class
 Controladores\LoginServlet.class
+DAOs\OpinionDAO.class
 paquete\proyectovaquerasipc2\resources\JakartaEE10Resource.class
 Utilidades\TipoUsuarioENUM.class
 DAOs\GrupoDAO.class
@@ -26,3 +28,4 @@ Controladores\AdminServlet.class
 Entidades\Juego.class
 Utilidades\ConexionDB.class
 Logica\LogicaGrupo.class
+Controladores\OpinionServlet.class
