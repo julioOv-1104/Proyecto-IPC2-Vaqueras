@@ -62,7 +62,8 @@ public class OpinionDAO extends DAO {
 
         try (Connection conn = conexion.conectar()) {
 
-            if (comprobarSiUsuarioTienenJuego(titulo, correo)) {//Solo puede calificar si compro el juego
+            //Solo puede calificar si compro el juego y si tiene como maximo 5 estrellas
+            if (comprobarSiUsuarioTienenJuego(titulo, correo) && (estrellas <= 5)) {
 
                 //Se agrega al usuario a su grupo
                 String sql = "INSERT INTO calificacion (correo_usuario, titulo, estrellas)"
