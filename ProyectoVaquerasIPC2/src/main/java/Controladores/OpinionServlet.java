@@ -29,6 +29,11 @@ public class OpinionServlet extends HttpServlet {
 
         response.setContentType("application/json; charset=UTF-8");
         String accion = request.getParameter("accion");
+        
+        if (accion == null) {
+            response.getWriter().print("{\"error\": \"Acción no especificada\"}");
+            return;
+        }
 
         switch (accion) {
             case "comentar":
@@ -43,7 +48,7 @@ public class OpinionServlet extends HttpServlet {
                 calificar(request, response, om);
                 break;
             default:
-                throw new AssertionError();
+                response.getWriter().print("{\"error\": \"Acción no válida\"}");
         }
 
     }

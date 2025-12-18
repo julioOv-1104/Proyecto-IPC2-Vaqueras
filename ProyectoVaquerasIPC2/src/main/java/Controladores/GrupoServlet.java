@@ -103,6 +103,7 @@ public class GrupoServlet extends HttpServlet {
                     response.getWriter().print("{\"error\": \"Acción no válida\"}");
             }
         } catch (Exception e) {
+            System.out.println("ERROR EN doDelte EN GrupoServlet");
             e.printStackTrace();
 
         }

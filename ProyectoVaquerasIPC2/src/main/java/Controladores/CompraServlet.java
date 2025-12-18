@@ -17,7 +17,6 @@ public class CompraServlet extends HttpServlet {
 
     private LogicaUsuario logicaU = new LogicaUsuario();
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

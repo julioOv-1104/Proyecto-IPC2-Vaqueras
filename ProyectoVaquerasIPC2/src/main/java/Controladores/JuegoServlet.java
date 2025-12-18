@@ -114,7 +114,7 @@ public class JuegoServlet extends HttpServlet {
             }
 
         } catch (Exception e) {
-            System.out.println("ERROR AL REGISTRAR JUEVO" + e.getMessage());
+            System.out.println("ERROR AL REGISTRAR JUEGO" + e.getMessage());
         }
 
     }

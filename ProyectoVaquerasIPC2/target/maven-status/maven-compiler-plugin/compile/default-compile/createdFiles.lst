@@ -6,10 +6,13 @@ DAOs\GamerDAO.class
 DAOs\DAO.class
 Entidades\Empresa.class
 paquete\proyectovaquerasipc2\JakartaRestConfiguration.class
+Controladores\InstalacionServlet.class
 Utilidades\TipoClasificacion.class
+Logica\LogicaInstalacion.class
 Entidades\GrupoFamiliar.class
 Controladores\LoginServlet.class
 DAOs\OpinionDAO.class
+others\CorsFilter.class
 paquete\proyectovaquerasipc2\resources\JakartaEE10Resource.class
 Utilidades\TipoUsuarioENUM.class
 DAOs\GrupoDAO.class
@@ -28,4 +31,5 @@ Controladores\AdminServlet.class
 Entidades\Juego.class
 Utilidades\ConexionDB.class
 Logica\LogicaGrupo.class
+DAOs\InstalacionDAO.class
 Controladores\OpinionServlet.class
