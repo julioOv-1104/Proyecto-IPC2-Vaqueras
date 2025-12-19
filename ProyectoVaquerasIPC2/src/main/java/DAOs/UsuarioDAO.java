@@ -3,6 +3,7 @@ package DAOs;
 import Entidades.Usuario;
 import Utilidades.ConexionDB;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 public class UsuarioDAO extends DAO {
 
     ConexionDB conexion = new ConexionDB();
+    
 
     public Usuario login(String correo_usuario, String contrasenna) {
 
@@ -36,6 +38,50 @@ public class UsuarioDAO extends DAO {
         }
         return user;
     }
+    
+    public Usuario exportarUsuario(String correo_usuario){
+    
+     String correo = correo_usuario.trim();//le quita los espacios sobrantes
+
+        Usuario user = new Usuario();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM usuario INNER JOIN usuario_comun "
+                    + "ON usuario.correo_usuario = usuario_comun.correo_usuario "
+                    + "WHERE usuario.correo_usuario = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, correo);
+
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                
+                String dinero = rs.getString("cartera");
+                double cartera = Double.parseDouble(dinero);
+                String fecha = rs.getString("fecha_nacimiento");
+                Date fecha_nacimiento = Date.valueOf(fecha);
+                
+                user.setCorreo_usuario(rs.getString("correo_usuario"));
+                user.setNickname(rs.getString("nickname"));
+                user.setPais(rs.getString("pais"));
+                user.setTelefono(rs.getString("telefono"));
+                user.setCartera(cartera);
+                user.setFecha_nacimiento(fecha_nacimiento);
+                
+                return user;
+                
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        
+    }
+    
+    
+    
 
     public Usuario registrarUsuario(Usuario nuevo) {
 

@@ -1,11 +1,14 @@
 
 package Entidades;
 
+import java.util.ArrayList;
+
 public class Empresa {
     
     private String nombre_empresa;
     private String descripcion;
     private double comision;
+    private ArrayList<String> titulos = new ArrayList<>();
 
     public Empresa(String nombre_empresa, String descripcion, double comision) {
         this.nombre_empresa = nombre_empresa;
@@ -38,6 +41,14 @@ public class Empresa {
 
     public void setComision(double comision) {
         this.comision = comision;
+    }
+
+    public ArrayList<String> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(ArrayList<String> titulos) {
+        this.titulos = titulos;
     }
     
     

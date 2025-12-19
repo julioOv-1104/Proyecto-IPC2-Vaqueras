@@ -15,6 +15,12 @@ public class LogicaJuego {
         
     }
     
+    public Juego obtenerJuego(String titulo){
+    
+        return juegoDao.exportarJuego(titulo);
+        
+    }
+    
     public boolean agregarCategoria(String titulo, String categoria){
     
         return juegoDao.agregarCategoriasJuego(titulo, categoria);

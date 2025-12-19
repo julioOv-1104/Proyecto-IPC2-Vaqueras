@@ -9,9 +9,12 @@ paquete\proyectovaquerasipc2\JakartaRestConfiguration.class
 Controladores\InstalacionServlet.class
 Utilidades\TipoClasificacion.class
 Logica\LogicaInstalacion.class
+Entidades\Comentario.class
 Entidades\GrupoFamiliar.class
 Controladores\LoginServlet.class
+Entidades\Categoria.class
 DAOs\OpinionDAO.class
+Entidades\InstalacionPrestamo.class
 others\CorsFilter.class
 paquete\proyectovaquerasipc2\resources\JakartaEE10Resource.class
 Utilidades\TipoUsuarioENUM.class
@@ -22,11 +25,13 @@ Controladores\RegistroServlet.class
 Logica\LogicaEmpresa.class
 Controladores\JuegoServlet.class
 DAOs\JuegoDAO.class
+Entidades\Calificacion.class
 Logica\LogicaJuego.class
 Controladores\EmpresaServlet.class
 Controladores\GrupoServlet.class
 Controladores\UsuarioServlet.class
 Controladores\CompraServlet.class
+Entidades\Compra.class
 Controladores\AdminServlet.class
 Entidades\Juego.class
 Utilidades\ConexionDB.class

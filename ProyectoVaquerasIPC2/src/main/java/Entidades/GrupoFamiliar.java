@@ -6,6 +6,7 @@ public class GrupoFamiliar {
     
     private String correo_encargado;
     private String nombre;
+    private String[] miembros = new String[6];
 
     public GrupoFamiliar() {
     }

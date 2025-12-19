@@ -26,6 +26,23 @@ public class JuegoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        response.setContentType("application/json; charset=UTF-8");
+
+        Juego entrante = objectMapper.readValue(request.getInputStream(), Juego.class);
+
+        Juego juego = logicaJ.obtenerJuego(entrante.getTitulo());
+
+        if (juego.getTitulo()== null) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener juego\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(juego);
+            response.getWriter().print(json);
+        }
+        
     }
 
     @Override
@@ -105,9 +122,6 @@ public class JuegoServlet extends HttpServlet {
             nuevo.setNombre_empresa(nombre_empresa);
             nuevo.setTipo_multimedia(tipo);
             
-
-            System.out.println("tipo de multimedia " + nuevo.getTipo_multimedia());
-            System.out.println("Titulo " + nuevo.getTitulo());
 
             Juego juegoNuevo = logicaJ.registrarJuegoNuevo(nuevo, inputStream);
 

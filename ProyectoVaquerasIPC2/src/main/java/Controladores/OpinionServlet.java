@@ -1,5 +1,6 @@
 package Controladores;
 
+import Entidades.Comentario;
 import Logica.LogicaOpinion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -19,6 +20,23 @@ public class OpinionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        response.setContentType("application/json; charset=UTF-8");
+
+        Comentario entrante = objectMapper.readValue(request.getInputStream(), Comentario.class);
+
+        Comentario comentario = logicaO.obtenerComentario(entrante.getCorreo_usuario(), entrante.getTitulo());
+
+        if (comentario.getTexto_comentario()== null) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener el comentario\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(comentario);
+            response.getWriter().print(json);
+        }
+        
     }
 
     @Override

@@ -3,10 +3,13 @@ package DAOs;
 import Entidades.*;
 import Utilidades.ConexionDB;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 public class JuegoDAO extends DAO {
 
@@ -21,7 +24,8 @@ public class JuegoDAO extends DAO {
             } else if (buscarPorParametros("empresa", "nombre_empresa", nuevo.getNombre_empresa())) {
 
                 //Se crea el juego en la DB
-                String sql = "INSERT INTO juego (titulo, descripcion, precio, clasificacion, fecha_lanzamiento, nombre_empresa, multimedia) \n"
+                String sql = "INSERT INTO juego (titulo, descripcion, precio, clasificacion, "
+                        + "fecha_lanzamiento, nombre_empresa, multimedia, tipo_multimedia) "
                         + "VALUES (?,?,?,?,?,?,?)";
                 PreparedStatement stm = conn.prepareStatement(sql);
                 stm.setString(1, nuevo.getTitulo());
@@ -31,6 +35,7 @@ public class JuegoDAO extends DAO {
                 stm.setDate(5, new java.sql.Date(nuevo.getFecha_lanzamiento().getTime()));
                 stm.setString(6, nuevo.getNombre_empresa());
                 stm.setBlob(7, is);
+                stm.setString(8, nuevo.getTipo_multimedia());
 
                 stm.executeUpdate();
 
@@ -42,6 +47,54 @@ public class JuegoDAO extends DAO {
         }
 
         return null;
+    }
+
+    public Juego exportarJuego(String titulo) {
+
+        Juego juego = new Juego();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM juego WHERE titulo = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, titulo);
+
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+
+                String costo = rs.getString("precio");
+                double precio = Double.parseDouble(costo);
+
+                String fecha = rs.getString("fecha_lanzamiento");
+                Date fecha_lanzamiento = Date.valueOf(fecha);
+
+                juego.setTitulo(titulo);
+                juego.setDescripcion(rs.getString("descripcion"));
+                juego.setPrecio(precio);
+                juego.setFecha_lanzamiento(fecha_lanzamiento);
+
+                Blob blob = rs.getBlob("multimedia");
+                if (blob != null) {
+                    // 1. Convertir el Blob en un arreglo de bytes
+                    byte[] bytesImagen = blob.getBytes(1, (int) blob.length());
+
+                    // 2. Convertir esos bytes a una cadena Base64
+                    String imagen64 = Base64.getEncoder().encodeToString(bytesImagen);
+
+                    // 3. Guardarlo en el objeto (asegúrate que setMultimedia reciba String)
+                    juego.setMultimedia(imagen64);
+                }
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return juego;
+
     }
 
     private boolean buscarCategoriaDuplicada(String titulo, String categoria) {
@@ -121,7 +174,7 @@ public class JuegoDAO extends DAO {
         return false;
     }
 
-     public boolean cambiarVisibilidadJuego(String titulo) {
+    public boolean cambiarVisibilidadJuego(String titulo) {
 
         try (Connection conn = conexion.conectar()) {
 
@@ -130,7 +183,6 @@ public class JuegoDAO extends DAO {
 
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, titulo);
-
 
             stm.executeUpdate();
 
@@ -141,9 +193,8 @@ public class JuegoDAO extends DAO {
         }
         return false;
     }
-    
-     
-     public boolean cambiarVisibilidadComentario(String titulo) {
+
+    public boolean cambiarVisibilidadComentario(String titulo) {
 
         try (Connection conn = conexion.conectar()) {
 
@@ -152,7 +203,6 @@ public class JuegoDAO extends DAO {
 
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, titulo);
-
 
             stm.executeUpdate();
 

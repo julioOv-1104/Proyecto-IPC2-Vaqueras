@@ -1,5 +1,6 @@
 package Controladores;
 
+import Entidades.Empresa;
 import Logica.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -19,6 +20,23 @@ public class EmpresaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        response.setContentType("application/json; charset=UTF-8");
+
+        Empresa entrante = objectMapper.readValue(request.getInputStream(), Empresa.class);
+
+        Empresa empresa = logicaE.obtenerEmpresa(entrante.getNombre_empresa());
+
+        if (empresa.getNombre_empresa() == null) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener empresa\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(empresa);
+            response.getWriter().print(json);
+        }
     }
 
     @Override

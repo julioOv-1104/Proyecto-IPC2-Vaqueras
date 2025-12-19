@@ -3,9 +3,10 @@ package Entidades;
 
 import Utilidades.TipoClasificacion;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.sql.Blob;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.sql.Date;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Juego {
     
     private String titulo;
@@ -17,14 +18,14 @@ public class Juego {
     private Date fecha_lanzamiento;
 
     private String tipo_multimedia;
-    private Blob multimedia;
+    private String multimedia;
     private boolean habilitado = true; 
     private String nombre_empresa;
 
     public Juego() {
     }
 
-    public Juego(String titulo, String descripcion, double precio, TipoClasificacion clasificacion, Date fecha_lanzamiento, String nombre_empresa, String tipo_multimedia, Blob multi) {
+    public Juego(String titulo, String descripcion, double precio, TipoClasificacion clasificacion, Date fecha_lanzamiento, String nombre_empresa, String tipo_multimedia, String multi) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -100,11 +101,11 @@ public class Juego {
         this.tipo_multimedia = tipo_multimedia;
     }
 
-    public Blob getMultimedia() {
+    public String getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(Blob multimedia) {
+    public void setMultimedia(String multimedia) {
         this.multimedia = multimedia;
     }
   

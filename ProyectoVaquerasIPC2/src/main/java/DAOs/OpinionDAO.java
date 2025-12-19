@@ -1,6 +1,8 @@
 package DAOs;
 
+import Entidades.*;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -112,6 +114,48 @@ public class OpinionDAO extends DAO {
 
         }
 
+    }
+    
+    public Comentario exportarCompra(String correo_usuario, String titulo){
+    
+
+        Comentario comentario = new Comentario();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM comentario WHERE correo_usuario = ? AND titulo = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, correo_usuario);
+            stm.setString(2, titulo);
+
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                
+                String id1 = rs.getString("id_comentario");
+                int id_comentario = Integer.parseInt(id1);
+                
+                String id2 = rs.getString("id_comentario_padre");
+                int id_padre = 0;
+                if (id2!=null) {
+                    id_padre = Integer.parseInt(id2);
+                }
+                
+                
+                comentario.setCorreo_usuario(correo_usuario);
+                comentario.setTitulo(titulo);
+                comentario.setId(id_comentario);
+                comentario.setId_padre(id_padre);
+                comentario.setTexto_comentario("texto_comentario");
+                
+                return comentario;   
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        
     }
 
 }

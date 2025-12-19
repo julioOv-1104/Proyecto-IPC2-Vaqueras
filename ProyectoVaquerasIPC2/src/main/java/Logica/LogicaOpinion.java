@@ -2,6 +2,7 @@
 package Logica;
 
 import DAOs.OpinionDAO;
+import Entidades.Comentario;
 
 public class LogicaOpinion {
     
@@ -9,6 +10,11 @@ public class LogicaOpinion {
     
     public boolean comentar(String correo, String titulo, String texto){
     return opinionDao.comentar(correo, titulo, texto);
+    
+    }
+    
+    public Comentario obtenerComentario(String correo, String titulo){
+    return opinionDao.exportarCompra(correo, titulo);
     
     }
     

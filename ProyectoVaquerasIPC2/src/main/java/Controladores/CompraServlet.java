@@ -1,5 +1,6 @@
 package Controladores;
 
+import Entidades.Compra;
 import Logica.LogicaUsuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -20,6 +21,23 @@ public class CompraServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        response.setContentType("application/json; charset=UTF-8");
+
+        Compra entrante = objectMapper.readValue(request.getInputStream(), Compra.class);
+
+        Compra compra = logicaU.obtenerCompra(entrante.getCorreo_usuario(), entrante.getTitulo());
+
+        if (compra.getCorreo_usuario() == null) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener compra\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(compra);
+            response.getWriter().print(json);
+        }
 
     }
 
