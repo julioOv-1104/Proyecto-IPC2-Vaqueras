@@ -2,7 +2,9 @@
 package Entidades;
 
 import Utilidades.TipoClasificacion;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.sql.Blob;
+import java.sql.Date;
 
 public class Juego {
     
@@ -10,23 +12,27 @@ public class Juego {
     private String descripcion;
     private double precio;
     private TipoClasificacion clasificacion;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Mexico_City")
     private Date fecha_lanzamiento;
-    private String multimedia; 
+
+    private String tipo_multimedia;
+    private Blob multimedia;
     private boolean habilitado = true; 
     private String nombre_empresa;
 
     public Juego() {
     }
 
-    public Juego(String titulo, String descripcion, double precio, TipoClasificacion clasificacion, Date fecha_lanzamiento, String multimedia, boolean habilitado, String nombre_empresa) {
+    public Juego(String titulo, String descripcion, double precio, TipoClasificacion clasificacion, Date fecha_lanzamiento, String nombre_empresa, String tipo_multimedia, Blob multi) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.precio = precio;
         this.clasificacion = clasificacion;
         this.fecha_lanzamiento = fecha_lanzamiento;
-        this.multimedia = multimedia;
-        this.habilitado = habilitado;
         this.nombre_empresa = nombre_empresa;
+        this.tipo_multimedia = tipo_multimedia;
+        this.multimedia = multi;
     }
 
     public String getTitulo() {
@@ -69,13 +75,6 @@ public class Juego {
         this.fecha_lanzamiento = fecha_lanzamiento;
     }
 
-    public String getMultimedia() {
-        return multimedia;
-    }
-
-    public void setMultimedia(String multimedia) {
-        this.multimedia = multimedia;
-    }
 
     public boolean isHabilitado() {
         return habilitado;
@@ -92,5 +91,22 @@ public class Juego {
     public void setNombre_empresa(String nombre_empresa) {
         this.nombre_empresa = nombre_empresa;
     }
+
+    public String getTipo_multimedia() {
+        return tipo_multimedia;
+    }
+
+    public void setTipo_multimedia(String tipo_multimedia) {
+        this.tipo_multimedia = tipo_multimedia;
+    }
+
+    public Blob getMultimedia() {
+        return multimedia;
+    }
+
+    public void setMultimedia(Blob multimedia) {
+        this.multimedia = multimedia;
+    }
   
+    
 }

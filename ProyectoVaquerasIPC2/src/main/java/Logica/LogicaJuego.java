@@ -3,14 +3,15 @@ package Logica;
 
 import DAOs.JuegoDAO;
 import Entidades.Juego;
+import java.io.InputStream;
 
 public class LogicaJuego {
     
     private JuegoDAO juegoDao = new JuegoDAO();
     
-    public Juego registrarJuegoNuevo(Juego nuevo){
+    public Juego registrarJuegoNuevo(Juego nuevo, InputStream is){
     
-        return juegoDao.registrarJuego(nuevo);
+        return juegoDao.registrarJuego(nuevo,is);
         
     }
     

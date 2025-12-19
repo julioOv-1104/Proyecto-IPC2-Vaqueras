@@ -2,15 +2,21 @@ package Controladores;
 
 import Entidades.*;
 import Logica.LogicaJuego;
+import Utilidades.TipoClasificacion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Date;
 import java.util.Map;
 
+@MultipartConfig
 @WebServlet(name = "JuegoServlet", urlPatterns = {"/JuegoServlet"})
 public class JuegoServlet extends HttpServlet {
 
@@ -74,9 +80,36 @@ public class JuegoServlet extends HttpServlet {
 
         try {
 
-            Juego nuevo = om.readValue(request.getInputStream(), Juego.class);
+            Part archivo = request.getPart("multimedia");
 
-            Juego juegoNuevo = logicaJ.registrarJuegoNuevo(nuevo);
+            InputStream inputStream = archivo.getInputStream();
+            String tipo = archivo.getContentType();
+
+            String titulo = request.getParameter("titulo");
+            String descripcion = request.getParameter("descripcion");
+            String precio = request.getParameter("precio");
+            double precioJuego = Double.parseDouble(precio);
+            String clasificacion = request.getParameter("clasificacion");
+            String fecha = request.getParameter("fecha_lanzamiento");
+            Date fecha_lanzamiento = Date.valueOf(fecha);
+            String nombre_empresa = request.getParameter("nombre_empresa");
+
+            //Juego nuevo = om.readValue(request.getInputStream(), Juego.class);
+            Juego nuevo = new Juego();
+            
+            nuevo.setTitulo(titulo);
+            nuevo.setDescripcion(descripcion);
+            nuevo.setPrecio(precioJuego);
+            nuevo.setClasificacion(TipoClasificacion.valueOf(clasificacion));
+            nuevo.setFecha_lanzamiento(fecha_lanzamiento);
+            nuevo.setNombre_empresa(nombre_empresa);
+            nuevo.setTipo_multimedia(tipo);
+            
+
+            System.out.println("tipo de multimedia " + nuevo.getTipo_multimedia());
+            System.out.println("Titulo " + nuevo.getTitulo());
+
+            Juego juegoNuevo = logicaJ.registrarJuegoNuevo(nuevo, inputStream);
 
             if (juegoNuevo == null) {
 
@@ -86,9 +119,9 @@ public class JuegoServlet extends HttpServlet {
                 String json = om.writeValueAsString(juegoNuevo);
                 response.getWriter().print(json);
             }
-
         } catch (Exception e) {
-            System.out.println("ERROR AL REGISTRAR JUEVO" + e.getMessage());
+            e.printStackTrace();
+            System.out.println("ERROR AL REGISTRAR JUEGO DESDE SERVLET" + e.getMessage());
         }
 
     }
@@ -177,7 +210,7 @@ public class JuegoServlet extends HttpServlet {
         }
 
     }
-    
+
     private void cambiarVisibilidadComentario(HttpServletRequest request, HttpServletResponse response, ObjectMapper om) {
 
         try {

@@ -2,6 +2,7 @@ package DAOs;
 
 import Entidades.*;
 import Utilidades.ConexionDB;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ public class JuegoDAO extends DAO {
 
     ConexionDB conexion = new ConexionDB();
 
-    public Juego registrarJuego(Juego nuevo) {
+    public Juego registrarJuego(Juego nuevo, InputStream is) {
 
         try (Connection conn = conexion.conectar()) {
 
@@ -29,7 +30,7 @@ public class JuegoDAO extends DAO {
                 stm.setString(4, nuevo.getClasificacion().name());
                 stm.setDate(5, new java.sql.Date(nuevo.getFecha_lanzamiento().getTime()));
                 stm.setString(6, nuevo.getNombre_empresa());
-                stm.setString(7, nuevo.getMultimedia());
+                stm.setBlob(7, is);
 
                 stm.executeUpdate();
 
