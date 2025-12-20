@@ -20,6 +20,24 @@ public class GrupoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        response.setContentType("application/json; charset=UTF-8");
+
+         GrupoFamiliar entrante = objectMapper.readValue(request.getInputStream(), GrupoFamiliar.class);
+
+        GrupoFamiliar nuevo  = logicaG.obtenerGrupo(entrante.getId_grupo());
+
+        if (nuevo.getId_grupo() ==0) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener el grupo\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(nuevo);
+            response.getWriter().print(json);
+        }
+        
+        
     }
 
     @Override//CREA UN GRUPO

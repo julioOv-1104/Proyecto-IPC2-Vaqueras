@@ -2,7 +2,7 @@
 package Logica;
 
 import DAOs.OpinionDAO;
-import Entidades.Comentario;
+import Entidades.*;
 
 public class LogicaOpinion {
     
@@ -13,8 +13,13 @@ public class LogicaOpinion {
     
     }
     
-    public Comentario obtenerComentario(String correo, String titulo){
-    return opinionDao.exportarCompra(correo, titulo);
+    public Comentario obtenerComentario(int id){
+    return opinionDao.exportarComentario(id);
+    
+    }
+    
+    public Calificacion obtenerCalificacion(String correo, String titulo){
+    return opinionDao.exportarCalificacion(correo, titulo);
     
     }
     

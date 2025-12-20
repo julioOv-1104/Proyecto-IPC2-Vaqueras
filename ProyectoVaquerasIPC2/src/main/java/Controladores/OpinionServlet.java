@@ -1,6 +1,6 @@
 package Controladores;
 
-import Entidades.Comentario;
+import Entidades.*;
 import Logica.LogicaOpinion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -23,20 +23,23 @@ public class OpinionServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
 
         response.setContentType("application/json; charset=UTF-8");
+        String accion = request.getParameter("accion");
 
-        Comentario entrante = objectMapper.readValue(request.getInputStream(), Comentario.class);
-
-        Comentario comentario = logicaO.obtenerComentario(entrante.getCorreo_usuario(), entrante.getTitulo());
-
-        if (comentario.getTexto_comentario()== null) {
-
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener el comentario\"}");
-
-        } else {
-            String json = objectMapper.writeValueAsString(comentario);
-            response.getWriter().print(json);
+        if (accion == null) {
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Accion no especificada\"}");
+            return;
         }
-        
+
+        switch (accion) {
+            case "obtenerComentario":
+                exportarComentario(request, response, objectMapper);
+                break;
+            case "obtenerCalificacion":
+                exportarCalificacion(request, response, objectMapper);
+                break;
+            default:
+                response.getWriter().print("{\"error\": \"Acción no válida\"}");
+        }
     }
 
     @Override
@@ -47,7 +50,7 @@ public class OpinionServlet extends HttpServlet {
 
         response.setContentType("application/json; charset=UTF-8");
         String accion = request.getParameter("accion");
-        
+
         if (accion == null) {
             response.getWriter().print("{\"error\": \"Acción no especificada\"}");
             return;
@@ -61,8 +64,8 @@ public class OpinionServlet extends HttpServlet {
             case "responder":
                 responder(request, response, om);
                 break;
-                
-                case "calificar":
+
+            case "calificar":
                 calificar(request, response, om);
                 break;
             default:
@@ -128,10 +131,10 @@ public class OpinionServlet extends HttpServlet {
         }
 
     }
-    
+
     private void calificar(HttpServletRequest request, HttpServletResponse response, ObjectMapper om)
-            throws ServletException, IOException{
-        
+            throws ServletException, IOException {
+
         try {
 
             Map<String, Object> datos = om.readValue(request.getInputStream(), Map.class);
@@ -155,7 +158,45 @@ public class OpinionServlet extends HttpServlet {
 
             System.out.println("ERROR AL INTENTAR CALIFICAR DESDE SERVLET " + e.getMessage());
         }
+
+    }
     
+    public void exportarComentario(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper)
+            throws ServletException, IOException{
+    
+    Comentario entrante = objectMapper.readValue(request.getInputStream(), Comentario.class);
+
+        Comentario comentario = logicaO.obtenerComentario(entrante.getId_comentario());
+
+        if (comentario.getTexto_comentario() == null) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener el comentario\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(comentario);
+            response.getWriter().print(json);
+        }
+        
+        
+    }
+    
+    public void exportarCalificacion(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper)
+            throws ServletException, IOException{
+    
+    Comentario entrante = objectMapper.readValue(request.getInputStream(), Comentario.class);
+
+        Calificacion nuevo  = logicaO.obtenerCalificacion(entrante.getCorreo_usuario(), entrante.getTitulo());
+
+        if (nuevo.getCorreo_usuario()== null) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener la calificacion\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(nuevo);
+            response.getWriter().print(json);
+        }
+        
+        
     }
 
 }

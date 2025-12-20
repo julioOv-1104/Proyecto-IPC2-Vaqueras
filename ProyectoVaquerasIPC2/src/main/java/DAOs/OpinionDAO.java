@@ -116,24 +116,21 @@ public class OpinionDAO extends DAO {
 
     }
     
-    public Comentario exportarCompra(String correo_usuario, String titulo){
+    public Comentario exportarComentario(int id){
     
 
         Comentario comentario = new Comentario();
 
         try (Connection conn = conexion.conectar()) {
 
-            String sql = "SELECT * FROM comentario WHERE correo_usuario = ? AND titulo = ?";
+            String sql = "SELECT * FROM comentario WHERE id_comentario = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, correo_usuario);
-            stm.setString(2, titulo);
+            stm.setInt(1, id);
 
             ResultSet rs = stm.executeQuery();
 
-            if (rs.next()) {
-                
-                String id1 = rs.getString("id_comentario");
-                int id_comentario = Integer.parseInt(id1);
+            while (rs.next()) {
+
                 
                 String id2 = rs.getString("id_comentario_padre");
                 int id_padre = 0;
@@ -142,13 +139,46 @@ public class OpinionDAO extends DAO {
                 }
                 
                 
-                comentario.setCorreo_usuario(correo_usuario);
-                comentario.setTitulo(titulo);
-                comentario.setId(id_comentario);
-                comentario.setId_padre(id_padre);
-                comentario.setTexto_comentario("texto_comentario");
+                comentario.setCorreo_usuario(rs.getString("correo_usuario"));
+                comentario.setTitulo(rs.getString("titulo"));
+                comentario.setId_comentario(id);
+                comentario.setId_comentario_padre(id_padre);
+                comentario.setTexto_comentario(rs.getString("texto_comentario"));
                 
                 return comentario;   
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        
+    }
+    
+    public Calificacion exportarCalificacion(String correo_usuario, String titulo){
+    
+
+        Calificacion calificacion = new Calificacion();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM calificacion WHERE correo_usuario = ? AND titulo = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, correo_usuario);
+            stm.setString(2, titulo);
+
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                
+                String puntaje = rs.getString("estrellas");
+                double estrellas = Double.parseDouble(puntaje);
+                
+                calificacion.setCorreo_usuario(rs.getString("correo_usuario"));
+                calificacion.setTitulo(titulo);
+                calificacion.setEstrellas(estrellas);
+                
+                return calificacion;   
             }
 
         } catch (Exception e) {

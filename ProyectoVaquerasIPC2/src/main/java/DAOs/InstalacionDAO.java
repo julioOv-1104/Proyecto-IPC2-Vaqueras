@@ -1,11 +1,13 @@
 package DAOs;
 
+import Entidades.InstalacionPrestamo;
 import Utilidades.ConexionDB;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class InstalacionDAO extends DAO {
 
@@ -141,6 +143,37 @@ public class InstalacionDAO extends DAO {
             System.out.println("ERROR AL DESINSTALAR EL JUEGO PRESTADO " + titulo + e.getMessage());
         }
         return false;
+    }
+    
+    public ArrayList<InstalacionPrestamo> exportarInstalacion(String correo){
+    
+
+        ArrayList<InstalacionPrestamo> instalacion = new ArrayList<>();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM instalacion_prestamo WHERE correo_usuario =?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, correo);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                
+                InstalacionPrestamo nuevo = new InstalacionPrestamo();
+                nuevo.setCorreo_usuario(correo);
+                nuevo.setEstado(rs.getBoolean("estado"));
+                nuevo.setFecha_instalacion(rs.getDate("fecha_instalacion"));
+                nuevo.setTitulo(rs.getString("titulo"));
+                instalacion.add(nuevo);
+            }
+            return instalacion;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        
     }
 
 }

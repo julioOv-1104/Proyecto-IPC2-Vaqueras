@@ -2,8 +2,10 @@
 package Logica;
 
 import DAOs.JuegoDAO;
+import Entidades.Categoria;
 import Entidades.Juego;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class LogicaJuego {
     
@@ -43,5 +45,9 @@ public class LogicaJuego {
     
         return juegoDao.cambiarVisibilidadComentario(titulo);
         
+    }
+    
+    public ArrayList<Categoria> obtenerCategorias(){
+    return juegoDao.exportarCategorias();
     }
 }

@@ -11,7 +11,7 @@ public class LogicaGrupo {
     public GrupoFamiliar crearGrupo(GrupoFamiliar nuevo){
     
         GrupoFamiliar creado = grupoDao.crearGrupoFamiliar(nuevo);
-       int id = grupoDao.obtenerIDgrupo(nuevo.getCorreo_encargado());//crea el grupo
+       int id = grupoDao.obtenerIDgrupo(nuevo.getCorreo_encargado(), nuevo.getNombre());//crea el grupo
         grupoDao.unirseAgrupo(id, nuevo.getCorreo_encargado());//lo agrega al grupo
         return creado;
     }
@@ -31,6 +31,11 @@ public class LogicaGrupo {
     public boolean borrarGrupo(int id){
     
         return grupoDao.borrarYsacarGrupo(id);
+    
+    }
+    
+    public GrupoFamiliar obtenerGrupo(int id){
+    return grupoDao.exportarGrupo(id);
     
     }
     

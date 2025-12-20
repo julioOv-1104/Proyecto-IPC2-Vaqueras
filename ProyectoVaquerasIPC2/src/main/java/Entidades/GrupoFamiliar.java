@@ -1,12 +1,15 @@
 
 package Entidades;
 
+import java.util.ArrayList;
+
 
 public class GrupoFamiliar {
     
     private String correo_encargado;
     private String nombre;
-    private String[] miembros = new String[6];
+    private ArrayList<String> miembros = new ArrayList<>();
+    private int id_grupo;
 
     public GrupoFamiliar() {
     }
@@ -30,6 +33,22 @@ public class GrupoFamiliar {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public ArrayList<String> getMiembros() {
+        return miembros;
+    }
+
+    public void setMiembros(ArrayList<String> miembros) {
+        this.miembros = miembros;
+    }
+
+    public int getId_grupo() {
+        return id_grupo;
+    }
+
+    public void setId_grupo(int id_grupo) {
+        this.id_grupo = id_grupo;
     }
     
     

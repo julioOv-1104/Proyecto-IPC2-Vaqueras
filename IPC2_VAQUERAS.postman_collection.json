@@ -1,0 +1,1109 @@
+{
+	"info": {
+		"_postman_id": "c789a935-439e-4892-ad81-de0f4a0061ec",
+		"name": "localhost:8080",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50783110",
+		"_collection_link": "https://julioovalle202232237-6354880.postman.co/workspace/Julio-Allan-Ovalle-Paz's-Worksp~62426cb6-6465-476c-8c75-e29620c4e187/collection/50783110-c789a935-439e-4892-ad81-de0f4a0061ec?action=share&source=collection_link&creator=50783110"
+	},
+	"item": [
+		{
+			"name": "ObtenerJuego",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"TLOU2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/JuegoServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"JuegoServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Cambiarle categoria a juego",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"juego\": \"\",\r\n \"categoriaVieja\": \"\",\r\n \"categoriaNueva\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/AdminServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"AdminServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerCalificacion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"\",\r\n    \"correo_usuario\": \"\",\r\n    \"id_comentario\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/OpinionServlet?accion=obtenerCalificacion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"OpinionServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "obtenerCalificacion"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EliminarEmpresario",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\": \"ffff\",\r\n    \"titulo\": \"TLOU2\",\r\n    \"descripcion\": \"Supervivencia con zombies\",\r\n    \"precio\": \"59.99\",\r\n    \"valor_procesador\": \"Intel Core i7-2600\",\r\n    \"valor_sistema\": \"Windows, Mac, Linux\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/EmpresaServlet?correo=empresario@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"EmpresaServlet"
+					],
+					"query": [
+						{
+							"key": "correo",
+							"value": "empresario@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegistrarJuego",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "titulo",
+							"value": "EA FC26",
+							"type": "text"
+						},
+						{
+							"key": "multimedia",
+							"type": "file",
+							"src": "/C:/Users/Usuario/Downloads/fc26.jpeg"
+						},
+						{
+							"key": "precio",
+							"value": "49.99",
+							"type": "text"
+						},
+						{
+							"key": "descripcion",
+							"value": "futbol",
+							"type": "text"
+						},
+						{
+							"key": "clasificacion",
+							"value": "E",
+							"type": "text"
+						},
+						{
+							"key": "fecha_lanzamiento",
+							"value": "2025-09-20",
+							"type": "text"
+						},
+						{
+							"key": "nombre_empresa",
+							"value": "ubisoft",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/JuegoServlet?accion=registrarJuego",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"JuegoServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "registrarJuego"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DesinstalarPrestado",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"correo_usuario\": \"julalova1104@gmail.com\",\r\n  \"titulo\": \"Call of Duty\"\r\n  \r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/InstalacionServlet?accion=prestado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"InstalacionServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "prestado"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerEmpresa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_empresa\": \"activision\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/EmpresaServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"EmpresaServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerUsuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\": \"diego@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/LoginServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"LoginServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CambiarComisionEspecifica",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_empresa\": \"\",\r\n    \"comision\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/AdminServlet?accion=comisionEspecifica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"AdminServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "comisionEspecifica"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CambiarComisionGlobal",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comision\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/AdminServlet?accion=comisionGlobal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"AdminServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "comisionGlobal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerCompra",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\": \"\",\r\n    \"titulo\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/CompraServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"CompraServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ComprarJuego",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\": \"\",\r\n    \"titulo\": \"\",\r\n    \"fecha_compra\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/CompraServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"CompraServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RecargarCartera",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\": \"\",\r\n    \"recarga\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/CompraServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"CompraServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CambiarVisibilidadComentario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_empresa\": \"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/EmpresaServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"EmpresaServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditarInformacionJuego",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"\",\r\n    \"descripcion\":\"\",\r\n    \"precio\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/EmpresaServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"EmpresaServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearGrupo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_encargado\": \"\",\r\n    \"nombre\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/GrupoServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"GrupoServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UnirseAgrupo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_miembro\": \"\",\r\n    \"id_grupo\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/GrupoServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"GrupoServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SalirDeGrupo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_miembro\": \"\",\r\n    \"id_grupo\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/GrupoServlet=accion=salir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"GrupoServlet=accion=salir"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BorrarGrupo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_grupo\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/GrupoServlet=accion=borrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"GrupoServlet=accion=borrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InstalarJuegoPrestado",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\":\"\",\r\n    \"correo_usuario\": \"\",\r\n    \"fecha_instalacion\": \"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/InstalacionServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"InstalacionServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instalar/DesinstalarJuegoPropio",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\":\"\",\r\n    \"correo_usuario\": \"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/InstalacionServlet?accion=popio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"InstalacionServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "popio"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerJuego",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/JuegoServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"JuegoServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AgregarRecursosAjuego",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"valor_almacenamiento\":\"\",\r\n    \"valor_ram\":\"\",\r\n    \"valor_procesador\": \"\",\r\n    \"valor_sistema\": \"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/JuegoServlet?accion=agregarRecursos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"JuegoServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "agregarRecursos"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\":\"\",\r\n    \"contrasenna\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/LoginServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"LoginServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerComentario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_comentario\":\"\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/OpinionServlet?accion=obtenerComentario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"OpinionServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "obtenerComentario"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comentar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\":\"\",\r\n    \"texto\":\"\",\r\n    \"titulo\":\"\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/OpinionServlet?accion=comentar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"OpinionServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "comentar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Responder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\":\"\",\r\n    \"texto\":\"\",\r\n    \"id_comentario_padre\":\"\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/OpinionServlet?accion=responder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"OpinionServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "responder"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\":\"\",\r\n    \"titulo\":\"\",\r\n    \"estrellas\":\"\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/OpinionServlet?accion=calificar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"OpinionServlet"
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "calificar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegistrarEmpresa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_empresa\":\"\",\r\n    \"descripcion\":\"\",\r\n    \"comision\":\"\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/RegistroEmpresaServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"RegistroEmpresaServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegistrarUsuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo_usuario\":\"\",\r\n    \"nickname\":\"\",\r\n    \"contrasenna\":\"\",\r\n    \"fecha_nacimiento\":\"\",\r\n    \"telefono\":\"\",\r\n    \"pais\":\"\",\r\n    \"nombre\":\"\",\r\n    \"nombre_empresa\":\"\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ProyectoVaquerasIPC2/RegistroServlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ProyectoVaquerasIPC2",
+						"RegistroServlet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

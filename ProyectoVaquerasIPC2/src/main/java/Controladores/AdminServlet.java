@@ -40,7 +40,7 @@ public class AdminServlet extends HttpServlet {
             response.getWriter().print("{\"mensaje\":\"Categoria cambiada de "+juego+"\"}");
 
         } catch (Exception e) {
-            System.out.println("ERROR AL CAMBIAR COMISION ESPECIFICA DESDE SERVLET " + e.getMessage());
+            System.out.println("ERROR AL CAMBIAR CAMBIAR CATEGORIA DESDE SERVLET " + e.getMessage());
         }
 
     }

@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 
 public class JuegoDAO extends DAO {
@@ -213,4 +214,33 @@ public class JuegoDAO extends DAO {
         }
         return false;
     }
+    
+    
+    public ArrayList<Categoria> exportarCategorias(){
+    
+
+        ArrayList<Categoria> categorias = new ArrayList();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM categoria";
+            PreparedStatement stm = conn.prepareStatement(sql);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                
+                Categoria nueva = new Categoria();
+                nueva.setNombre_categoria(rs.getString("nombre_categoria"));
+                categorias.add(nueva);
+            }
+            return categorias;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        
+    }
+    
 }

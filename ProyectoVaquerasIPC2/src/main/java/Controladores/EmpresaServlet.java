@@ -93,7 +93,7 @@ public class EmpresaServlet extends HttpServlet {
 
             if (todoBien) {
 
-                response.getWriter().print("{\"mensaje\":\"Se edito lainformacion del juego\"}");
+                response.getWriter().print("{\"mensaje\":\"Se edito la informacion del juego\"}");
 
             } else {
 

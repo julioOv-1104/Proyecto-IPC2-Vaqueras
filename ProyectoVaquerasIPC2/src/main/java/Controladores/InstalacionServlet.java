@@ -1,5 +1,6 @@
 package Controladores;
 
+import Entidades.*;
 import Logica.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Map;
 
 @WebServlet(name = "InstalacionServlet", urlPatterns = {"/InstalacionServlet"})
@@ -21,6 +23,24 @@ public class InstalacionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        response.setContentType("application/json; charset=UTF-8");
+
+         InstalacionPrestamo entrante = objectMapper.readValue(request.getInputStream(), InstalacionPrestamo.class);
+
+        ArrayList<InstalacionPrestamo> nuevo  = logicaIns.obtenerInstalaciones(entrante.getCorreo_usuario());
+
+        if (nuevo.isEmpty()) {//si está vacio
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener las instalaciones de juegos prestados\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(nuevo);
+            response.getWriter().print(json);
+        }
+        
     }
 
     @Override

@@ -14,6 +14,7 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Map;
 
 @MultipartConfig
@@ -30,17 +31,30 @@ public class JuegoServlet extends HttpServlet {
 
         response.setContentType("application/json; charset=UTF-8");
 
-        Juego entrante = objectMapper.readValue(request.getInputStream(), Juego.class);
+        String accionRecibida = request.getParameter("accion");
 
-        Juego juego = logicaJ.obtenerJuego(entrante.getTitulo());
+        if (accionRecibida == null) {
+            response.getWriter().print("{\"error\": \"Acción no especificada\"}");
+            return;
+        }
 
-        if (juego.getTitulo()== null) {
+        try {
+            switch (accionRecibida) {
+                case "obtenerJuego":
+                    exportarJuegos(request, response, objectMapper);
+                    break;
 
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener juego\"}");
+                case "obtenerCategorias":
+                    exportarCategorias(request, response, objectMapper);
+                    break;
 
-        } else {
-            String json = objectMapper.writeValueAsString(juego);
-            response.getWriter().print(json);
+                default:
+
+                    response.getWriter().print("{\"error\": \"Acción no válida\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
         
     }
@@ -247,6 +261,51 @@ public class JuegoServlet extends HttpServlet {
         } catch (Exception e) {
 
             System.out.println("ERROR AL CAMBIAR VISIBILIDAD de los comentarios" + e.getMessage());
+        }
+
+    }
+    
+    private void exportarJuegos(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper) {
+
+        try {
+
+             Juego entrante = objectMapper.readValue(request.getInputStream(), Juego.class);
+
+        Juego juego = logicaJ.obtenerJuego(entrante.getTitulo());
+
+        if (juego.getTitulo()== null) {
+
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener juego\"}");
+
+        } else {
+            String json = objectMapper.writeValueAsString(juego);
+            response.getWriter().print(json);
+        }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR AL OBTENER JUEGO DESDE SERVLET" + e.getMessage());
+        }
+
+    }
+    
+    private void exportarCategorias(HttpServletRequest request, HttpServletResponse response, ObjectMapper om) {
+
+        try {
+
+                ArrayList<Categoria> categorias = logicaJ.obtenerCategorias();
+
+            if (categorias.isEmpty()) {
+
+                response.getWriter().print("{\"mensaje\":\"Error al intentar obtener las categorias\"}");
+
+            } else {
+                String json = om.writeValueAsString(categorias);
+                response.getWriter().print(json);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR AL OBTENER CATEGORIAS DESDE SERVLET" + e.getMessage());
         }
 
     }

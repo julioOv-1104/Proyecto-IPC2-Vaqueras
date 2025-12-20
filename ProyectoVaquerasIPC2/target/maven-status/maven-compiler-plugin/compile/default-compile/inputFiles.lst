@@ -1,6 +1,7 @@
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\JuegoServlet.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Utilidades\TipoClasificacion.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Empresa.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Comentario.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Juego.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\paquete\proyectovaquerasipc2\JakartaRestConfiguration.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\CompraServlet.java
@@ -9,10 +10,12 @@ C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoV
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\others\CorsFilter.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\UsuarioServlet.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\DAO.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Compra.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Usuario.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\RegistroEmpresaServlet.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Logica\LogicaGrupo.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\OpinionServlet.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\InstalacionPrestamo.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Logica\LogicaOpinion.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\GamerDAO.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\UsuarioDAO.java
@@ -22,8 +25,10 @@ C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoV
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Logica\LogicaEmpresa.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\InstalacionDAO.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\GrupoDAO.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Calificacion.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Utilidades\ConexionDB.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\DAOs\JuegoDAO.java
+C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Entidades\Categoria.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\LoginServlet.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Utilidades\TipoUsuarioENUM.java
 C:\Users\Usuario\OneDrive\Documents\Proyecto_IPC2_Vaqueras_JulioOvalle\ProyectoVaquerasIPC2\src\main\java\Controladores\AdminServlet.java

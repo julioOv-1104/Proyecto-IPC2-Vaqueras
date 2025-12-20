@@ -1,12 +1,15 @@
 
 package Entidades;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.sql.Date;
 
 public class InstalacionPrestamo {
     
     private String correo_usuario;
     private String titulo;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Mexico_City")
     private Date fecha_instalacion;
     private boolean estado;
 

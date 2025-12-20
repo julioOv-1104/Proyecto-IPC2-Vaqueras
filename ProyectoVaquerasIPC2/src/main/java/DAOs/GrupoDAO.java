@@ -11,13 +11,14 @@ public class GrupoDAO extends DAO {
 
     ConexionDB conexion = new ConexionDB();
 
-    public int obtenerIDgrupo(String correo) {
+    public int obtenerIDgrupo(String correo, String nombre) {
 
         try (Connection conn = conexion.conectar()) {
 
-            String sql = "SELECT id_grupo FROM grupo_familiar WHERE correo_encargado = ?";
+            String sql = "SELECT id_grupo FROM grupo_familiar WHERE correo_encargado = ? AND nombre = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, correo);
+            stm.setString(2, nombre);
 
             ResultSet rs = stm.executeQuery();
 
@@ -147,6 +148,36 @@ public class GrupoDAO extends DAO {
 
         return false;
 
+    }
+    
+    public GrupoFamiliar exportarGrupo(int id_grupo){
+    
+
+        GrupoFamiliar grupo = new GrupoFamiliar();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM grupo_familiar INNER JOIN miembro_grupo "
+                    + "ON grupo_familiar.id_grupo = miembro_grupo.id_grupo "
+                    + "WHERE grupo_familiar.id_grupo =?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, id_grupo);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                grupo.setId_grupo(id_grupo);
+                grupo.setNombre(rs.getString("nombre"));
+                grupo.setCorreo_encargado(rs.getString("correo_encargado"));
+                grupo.getMiembros().add(rs.getString("correo_miembro"));    
+            }
+            return grupo;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        
     }
 
 }

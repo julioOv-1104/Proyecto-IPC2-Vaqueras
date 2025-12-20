@@ -2,7 +2,9 @@
 package Logica;
 
 import DAOs.InstalacionDAO;
+import Entidades.InstalacionPrestamo;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class LogicaInstalacion {
     
@@ -24,6 +26,12 @@ public class LogicaInstalacion {
     
         return instaDao.desinstalarJuegoPrestado(titulo, correo);
         
+    }
+    
+    public ArrayList<InstalacionPrestamo> obtenerInstalaciones(String correo){
+        
+        return instaDao.exportarInstalacion(correo);
+    
     }
     
 }

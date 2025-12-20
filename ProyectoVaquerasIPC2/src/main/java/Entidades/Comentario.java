@@ -8,8 +8,8 @@ public class Comentario {
     
     private String correo_usuario;
     private String titulo;
-    private int id;
-    private int id_padre;
+    private int id_comentario;
+    private int id_comentario_padre;
     private String texto_comentario;
 
     public Comentario() {
@@ -31,20 +31,20 @@ public class Comentario {
         this.titulo = titulo;
     }
 
-    public int getId() {
-        return id;
+    public int getId_comentario() {
+        return id_comentario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_comentario(int id_comentario) {
+        this.id_comentario = id_comentario;
     }
 
-    public int getId_padre() {
-        return id_padre;
+    public int getId_comentario_padre() {
+        return id_comentario_padre;
     }
 
-    public void setId_padre(int id_padre) {
-        this.id_padre = id_padre;
+    public void setId_comentario_padre(int id_comentario_padre) {
+        this.id_comentario_padre = id_comentario_padre;
     }
 
     public String getTexto_comentario() {
