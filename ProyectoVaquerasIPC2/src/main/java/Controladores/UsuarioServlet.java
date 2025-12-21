@@ -1,7 +1,6 @@
 
 package Controladores;
 
-import Entidades.*;
 import Logica.LogicaUsuario;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
