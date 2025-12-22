@@ -1,7 +1,7 @@
 package Logica;
 
 import DAOs.*;
-import Entidades.Usuario;
+import Entidades.*;
 import Utilidades.TipoUsuarioENUM;
 import java.sql.Date;
 
@@ -12,6 +12,14 @@ public class LogicaUsuario {
 
     public Usuario login(String correo_usuario, String contrasenna) {
         return usuarioDAO.login(correo_usuario, contrasenna);
+    }
+    
+    public Usuario obtenerUsuario(String correo_usuario){
+     return usuarioDAO.exportarUsuario(correo_usuario);
+    }
+    
+     public Compra obtenerCompra(String correo_usuario, String titulo){
+     return gamerDao.exportarCompra(correo_usuario, titulo);
     }
 
     public Usuario registrar(Usuario nuevo) {

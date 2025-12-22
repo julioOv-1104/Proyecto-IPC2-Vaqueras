@@ -59,7 +59,7 @@ public class ReportesAdminDAO extends DAO {
                     + "      SELECT 1 FROM juego_categoria jc \n"
                     + "      WHERE jc.titulo = j.titulo AND jc.nombre_categoria = ?\n"
                     + "  ))\n"
-                    + "ORDER BY total_ventas DESC;";
+                    + "ORDER BY total_ventas DESC";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, clasificacion);
             stm.setString(2, clasificacion);

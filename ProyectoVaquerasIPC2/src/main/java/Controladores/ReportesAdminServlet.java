@@ -15,7 +15,7 @@ import java.util.Map;
 @WebServlet(name = "ReportesAdminServlet", urlPatterns = {"/ReportesAdminServlet"})
 public class ReportesAdminServlet extends HttpServlet {
 
-    private ReportesAdminDAO reportesDao = new ReportesAdminDAO();
+    ReportesAdminDAO reportesDao = new ReportesAdminDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

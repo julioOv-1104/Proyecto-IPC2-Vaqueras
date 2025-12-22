@@ -46,6 +46,12 @@ public class LogicaEmpresa {
         
     }
     
+    public Empresa obtenerEmpresa(String empresa){
+    
+        return empresaDAO.exportarEmpresa(empresa);
+        
+    }
+    
     public boolean editarInformacion(String titulo, String descripcion, double precio){
     
         return empresaDAO.editarInformacion(titulo, descripcion, precio);
