@@ -11,7 +11,6 @@ import java.sql.SQLException;
 public class UsuarioDAO extends DAO {
 
     ConexionDB conexion = new ConexionDB();
-    
 
     public Usuario login(String correo_usuario, String contrasenna) {
 
@@ -22,7 +21,19 @@ public class UsuarioDAO extends DAO {
 
         try (Connection conn = conexion.conectar()) {
 
-            String sql = "SELECT correo_usuario, nickname, pais, fecha_nacimiento FROM usuario WHERE correo_usuario=? AND contrasenna=?";
+            String sql = "SELECT \n"
+                    + "    u.*,c.cartera, \n"
+                    + "    CASE \n"
+                    + "        WHEN a.correo_usuario IS NOT NULL THEN 'ADMIN'\n"
+                    + "        WHEN e.correo_usuario IS NOT NULL THEN 'EMPRESARIO'\n"
+                    + "        WHEN c.correo_usuario IS NOT NULL THEN 'USUARIO_COMUN'\n"
+                    + "        ELSE 'Sin Rol Asignado'\n"
+                    + "    END AS tipo_usuario\n"
+                    + "FROM usuario u\n"
+                    + "LEFT JOIN admin a ON u.correo_usuario = a.correo_usuario\n"
+                    + "LEFT JOIN empresario e ON u.correo_usuario = e.correo_usuario\n"
+                    + "LEFT JOIN usuario_comun c ON u.correo_usuario = c.correo_usuario\n"
+                    + "WHERE u.correo_usuario = ? AND u.contrasenna = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, correo);
             stm.setString(2, contra);
@@ -30,7 +41,9 @@ public class UsuarioDAO extends DAO {
             ResultSet rs = stm.executeQuery();
 
             if (rs.next()) {
-                user = new Usuario(rs.getString("correo_usuario"), rs.getString("nickname"), rs.getString("pais"), rs.getDate("fecha_nacimiento"));
+                user = new Usuario(rs.getString("correo_usuario"), rs.getString("nickname"), rs.getString("pais"), 
+                        rs.getDate("fecha_nacimiento"), rs.getString("tipo_usuario"));
+                user.setCartera(rs.getDouble("cartera"));
             }
 
         } catch (Exception e) {
@@ -38,10 +51,10 @@ public class UsuarioDAO extends DAO {
         }
         return user;
     }
-    
-    public Usuario exportarUsuario(String correo_usuario){
-    
-     String correo = correo_usuario.trim();//le quita los espacios sobrantes
+
+    public Usuario exportarUsuario(String correo_usuario) {
+
+        String correo = correo_usuario.trim();//le quita los espacios sobrantes
 
         Usuario user = new Usuario();
 
@@ -56,39 +69,36 @@ public class UsuarioDAO extends DAO {
             ResultSet rs = stm.executeQuery();
 
             if (rs.next()) {
-                
+
                 String dinero = rs.getString("cartera");
                 double cartera = Double.parseDouble(dinero);
                 String fecha = rs.getString("fecha_nacimiento");
                 Date fecha_nacimiento = Date.valueOf(fecha);
-                
+
                 user.setCorreo_usuario(rs.getString("correo_usuario"));
                 user.setNickname(rs.getString("nickname"));
                 user.setPais(rs.getString("pais"));
                 user.setTelefono(rs.getString("telefono"));
                 user.setCartera(cartera);
                 user.setFecha_nacimiento(fecha_nacimiento);
-                
+
                 return user;
-                
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
-        
+
     }
-    
-    
-    
 
     public Usuario registrarUsuario(Usuario nuevo) {
 
         try (Connection conn = conexion.conectar()) {
 
             if (buscarPorParametros("usuario", "correo_usuario", nuevo.getCorreo_usuario())
-                    || buscarPorParametros("usuario", "nickname", nuevo.getNickname())) {
+                    || buscarPorParametros("usuario", "nickname", nuevo.getNickname()) || nuevo.getCorreo_usuario().isBlank()) {
 
             } else {
 
@@ -125,7 +135,7 @@ public class UsuarioDAO extends DAO {
 
         try (Connection conn = conexion.conectar()) {
 
-            if (buscarPorParametros("usuario", "correo_usuario", nuevo.getCorreo_usuario())) {
+            if (buscarPorParametros("usuario", "correo_usuario", nuevo.getCorreo_usuario()) || nuevo.getCorreo_usuario().isBlank()) {
 
             } else {
 
@@ -158,12 +168,12 @@ public class UsuarioDAO extends DAO {
         try (Connection conn = conexion.conectar()) {
 
             //Revisa que el correo no este en uso
-            if (buscarPorParametros("usuario", "correo_usuario", nuevo.getCorreo_usuario())) {
+            if (buscarPorParametros("usuario", "correo_usuario", nuevo.getCorreo_usuario()) || nuevo.getCorreo_usuario().isBlank()) {
             } else {
 
                 //Revisa que la empresa exista
                 if (buscarPorParametros("empresa", "nombre_empresa", nuevo.getNombre_empresa())) {
-                    
+
                     //Se crea el usuario en la DB
                     String sql = "INSERT INTO usuario (correo_usuario, fecha_nacimiento, contrasenna)"
                             + " VALUES (?,?,?)";
@@ -183,7 +193,7 @@ public class UsuarioDAO extends DAO {
                     stm2.executeUpdate();
 
                     return nuevo;
-                }else{
+                } else {
                     System.out.println("LA EMPRESA NO EXISTE");
                 }
 

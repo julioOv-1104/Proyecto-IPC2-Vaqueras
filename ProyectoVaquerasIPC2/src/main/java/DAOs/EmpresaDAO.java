@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EmpresaDAO extends DAO {
 
@@ -224,6 +225,8 @@ public class EmpresaDAO extends DAO {
     public Empresa exportarEmpresa(String nombre_empresa) {
 
         Empresa empresa = new Empresa();
+        
+        
 
         try (Connection conn = conexion.conectar()) {
 
@@ -240,7 +243,7 @@ public class EmpresaDAO extends DAO {
                 String porcentaje = rs.getString("comision");
                 double comision = Double.parseDouble(porcentaje);
                 
-                empresa.setNombre_empresa(nombre_empresa);
+                empresa.setNombre_empresa("nombre_empresa");
                 empresa.setDescripcion(rs.getString("descripcion"));
                 empresa.getTitulos().add(rs.getString("titulo"));
                 empresa.setComision(comision);
@@ -249,9 +252,45 @@ public class EmpresaDAO extends DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("ERROR AL OBTENER EMPRESA DESDE DAO");
             return null;
         }
+        
         return empresa;
+
+    }
+    
+    public ArrayList<Empresa> exportarTodasEmpresas() {
+
+        ArrayList<Empresa> empresas = new ArrayList<>();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM empresa";
+            PreparedStatement stm = conn.prepareStatement(sql);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                
+                Empresa empresa = new Empresa();
+                
+                String porcentaje = rs.getString("comision");
+                double comision = Double.parseDouble(porcentaje);
+                
+                empresa.setNombre_empresa(rs.getString("nombre_empresa"));
+                empresa.setDescripcion(rs.getString("descripcion"));
+                empresa.setComision(comision);
+                
+                empresas.add(empresa);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return empresas;
 
     }
 

@@ -50,4 +50,8 @@ public class LogicaJuego {
     public ArrayList<Categoria> obtenerCategorias(){
     return juegoDao.exportarCategorias();
     }
+    
+    public ArrayList<Juego> obtenerJuegos(){
+    return juegoDao.exportarTodosLosJuegos();
+    }
 }

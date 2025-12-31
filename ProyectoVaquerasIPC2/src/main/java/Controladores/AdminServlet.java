@@ -36,8 +36,8 @@ public class AdminServlet extends HttpServlet {
             String categoriaNueva = (String) datos.get("categoriaNueva");
 
             logicaE.cambiarCategoriaJuego(juego, categoriaNueva, categoriaVieja);
-            
-            response.getWriter().print("{\"mensaje\":\"Categoria cambiada de "+juego+"\"}");
+
+            response.getWriter().print("{\"mensaje\":\"Categoria cambiada de " + juego + "\"}");
 
         } catch (Exception e) {
             System.out.println("ERROR AL CAMBIAR CAMBIAR CATEGORIA DESDE SERVLET " + e.getMessage());
@@ -94,10 +94,12 @@ public class AdminServlet extends HttpServlet {
 
             if (todoBien) {
 
-                response.getWriter().print("{\"mensaje\": \"Comision especifica ctualizada para \" " + empresa + "}");
+                response.getWriter().print("{\"status\":\"exito\",\"mensaje\":\"Comision especifica ctualizada para: " + empresa + "\"}");
+
             } else {
 
-                response.getWriter().print("{\"error\": \"La comisión es mayor a la global o empresa no existe\"}");
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\"La comisión es mayor a la global\"}");
+
             }
 
         } catch (Exception e) {
@@ -117,10 +119,10 @@ public class AdminServlet extends HttpServlet {
 
             if (todoBien) {
 
-                response.getWriter().print("{\"mensaje\": \"Comision global actualizada \"}");
+                response.getWriter().print("{\"status\":\"exito\",\"mensaje\":\"Comision global actualizada\"}");
             } else {
 
-                response.getWriter().print("{\"error\": \"La comisión es invalida\"}");
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\"La comisión es invalida\"}");
             }
 
         } catch (Exception e) {

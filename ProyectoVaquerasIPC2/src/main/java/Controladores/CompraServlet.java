@@ -62,7 +62,7 @@ public class CompraServlet extends HttpServlet {
 
         if (todoBien) {
 
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\"Compra realizada con exito\"}");
+            response.getWriter().print("{\"status\":\"exito\",\"mensaje\":\"Compra realizada con exito\"}");
         } else {
             response.getWriter().print("{\"status\":\"error\",\"mensaje\":\"Error al intentar la compra\"}");
         }

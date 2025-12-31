@@ -41,7 +41,11 @@ public class JuegoServlet extends HttpServlet {
         try {
             switch (accionRecibida) {
                 case "obtenerJuego":
-                    exportarJuegos(request, response, objectMapper);
+                    exportarJuego(request, response, objectMapper);
+                    break;
+
+                case "obtenerTodosLosJuegos":
+                    exportarTodosJuegos(request, response, objectMapper);
                     break;
 
                 case "obtenerCategorias":
@@ -56,7 +60,7 @@ public class JuegoServlet extends HttpServlet {
             e.printStackTrace();
 
         }
-        
+
     }
 
     @Override
@@ -122,12 +126,13 @@ public class JuegoServlet extends HttpServlet {
             double precioJuego = Double.parseDouble(precio);
             String clasificacion = request.getParameter("clasificacion");
             String fecha = request.getParameter("fecha_lanzamiento");
+            System.out.println("fechaaaaaa: "+fecha);
             Date fecha_lanzamiento = Date.valueOf(fecha);
             String nombre_empresa = request.getParameter("nombre_empresa");
 
             //Juego nuevo = om.readValue(request.getInputStream(), Juego.class);
             Juego nuevo = new Juego();
-            
+
             nuevo.setTitulo(titulo);
             nuevo.setDescripcion(descripcion);
             nuevo.setPrecio(precioJuego);
@@ -135,7 +140,6 @@ public class JuegoServlet extends HttpServlet {
             nuevo.setFecha_lanzamiento(fecha_lanzamiento);
             nuevo.setNombre_empresa(nombre_empresa);
             nuevo.setTipo_multimedia(tipo);
-            
 
             Juego juegoNuevo = logicaJ.registrarJuegoNuevo(nuevo, inputStream);
 
@@ -167,11 +171,11 @@ public class JuegoServlet extends HttpServlet {
 
             if (todoBien) {
 
-                response.getWriter().print("{\"mensaje\":\"Se asignó categoria a juego\"}");
+                response.getWriter().print("{\"status\":\"exito\",\"mensaje\":\" Se asignó categoria a juego\"}");
 
             } else {
 
-                response.getWriter().print("{\"mensaje\":\"Error al intentar asignar categoria a juego\"}");
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\"Error al intentar asignar categoria a juego\"}");
             }
 
         } catch (Exception e) {
@@ -264,24 +268,24 @@ public class JuegoServlet extends HttpServlet {
         }
 
     }
-    
-    private void exportarJuegos(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper) {
+
+    private void exportarJuego(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper) {
 
         try {
 
-             Juego entrante = objectMapper.readValue(request.getInputStream(), Juego.class);
+            Juego entrante = objectMapper.readValue(request.getInputStream(), Juego.class);
 
-        Juego juego = logicaJ.obtenerJuego(entrante.getTitulo());
+            Juego juego = logicaJ.obtenerJuego(entrante.getTitulo());
 
-        if (juego.getTitulo()== null) {
+            if (juego.getTitulo() == null) {
 
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener juego\"}");
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener juego\"}");
 
-        } else {
-            String json = objectMapper.writeValueAsString(juego);
-            response.getWriter().print(json);
-        }
-        
+            } else {
+                String json = objectMapper.writeValueAsString(juego);
+                response.getWriter().print(json);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("ERROR AL OBTENER JUEGO DESDE SERVLET" + e.getMessage());
@@ -289,11 +293,34 @@ public class JuegoServlet extends HttpServlet {
 
     }
     
+    private void exportarTodosJuegos(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper) {
+
+        try {
+
+
+            ArrayList<Juego> juego = logicaJ.obtenerJuegos();
+
+            if (juego.isEmpty()) {
+
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener todos los juegos\"}");
+
+            } else {
+                String json = objectMapper.writeValueAsString(juego);
+                response.getWriter().print(json);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR AL OBTENER TODOS LOS JUEGOS DESDE SERVLET" + e.getMessage());
+        }
+
+    }
+
     private void exportarCategorias(HttpServletRequest request, HttpServletResponse response, ObjectMapper om) {
 
         try {
 
-                ArrayList<Categoria> categorias = logicaJ.obtenerCategorias();
+            ArrayList<Categoria> categorias = logicaJ.obtenerCategorias();
 
             if (categorias.isEmpty()) {
 

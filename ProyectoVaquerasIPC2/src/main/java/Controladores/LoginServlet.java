@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 
         if (usuario == null) {
 
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error\"}");
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener usuario\"}");
 
         } else {
             String json = objectMapper.writeValueAsString(usuario);

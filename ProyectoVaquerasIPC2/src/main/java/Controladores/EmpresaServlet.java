@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 @WebServlet(name = "EmpresaServlet", urlPatterns = {"/EmpresaServlet"})
@@ -20,22 +21,28 @@ public class EmpresaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
         ObjectMapper objectMapper = new ObjectMapper();
 
         response.setContentType("application/json; charset=UTF-8");
+        String accion = request.getParameter("accion");
 
-        Empresa entrante = objectMapper.readValue(request.getInputStream(), Empresa.class);
+        if (accion == null) {
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Accion no especificada\"}");
+            return;
+        }
 
-        Empresa empresa = logicaE.obtenerEmpresa(entrante.getNombre_empresa());
+        switch (accion) {
+            case "obtenerUna":
 
-        if (empresa.getNombre_empresa() == null) {
+                obtenerUna(request, response, objectMapper);
 
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener empresa\"}");
+                break;
 
-        } else {
-            String json = objectMapper.writeValueAsString(empresa);
-            response.getWriter().print(json);
+            case "obtenerTodas":
+                obtenerTodas(request, response, objectMapper);
+                break;
+            default:
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Accion no valida\"}");
         }
     }
 
@@ -145,5 +152,51 @@ public class EmpresaServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void obtenerUna(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper) {
+
+        try {
+
+            Empresa entrante = objectMapper.readValue(request.getInputStream(), Empresa.class);
+
+            Empresa empresa = logicaE.obtenerEmpresa(entrante.getNombre_empresa());
+
+            if (empresa.getNombre_empresa() == null) {
+
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener empresa\"}");
+
+            } else {
+                String json = objectMapper.writeValueAsString(empresa);
+                response.getWriter().print(json);
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERROR AL OBTENER EMPRESA DESDE SERVLET");
+        }
+
+    }
+
+    private void obtenerTodas(HttpServletRequest request, HttpServletResponse response, ObjectMapper objectMapper) {
+        
+        
+        try {
+            
+            
+             ArrayList<Empresa> empresas = logicaE.obtenerTodasEmpresaa();
+
+            if (empresas.isEmpty()) {
+
+                response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener todas las empresas\"}");
+
+            } else {
+                String json = objectMapper.writeValueAsString(empresas);
+                response.getWriter().print(json);
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
+    }
 
 }

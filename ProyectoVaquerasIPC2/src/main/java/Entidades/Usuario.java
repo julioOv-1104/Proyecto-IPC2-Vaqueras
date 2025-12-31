@@ -42,11 +42,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String correo_usuario, String nickname, String pais, Date fecha) {
+    public Usuario(String correo_usuario, String nickname, String pais, Date fecha, String tipo) {
         this.correo_usuario = correo_usuario;
         this.nickname = nickname;
         this.pais = pais;
         this.fecha_nacimiento = fecha;
+        this.tipo_usuario = TipoUsuarioENUM.valueOf(tipo);
     }
 
     public String getCorreo_usuario() {

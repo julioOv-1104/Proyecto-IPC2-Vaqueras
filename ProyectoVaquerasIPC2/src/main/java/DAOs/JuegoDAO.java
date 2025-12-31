@@ -2,6 +2,7 @@ package DAOs;
 
 import Entidades.*;
 import Utilidades.ConexionDB;
+import Utilidades.TipoClasificacion;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -27,7 +28,7 @@ public class JuegoDAO extends DAO {
                 //Se crea el juego en la DB
                 String sql = "INSERT INTO juego (titulo, descripcion, precio, clasificacion, "
                         + "fecha_lanzamiento, nombre_empresa, multimedia, tipo_multimedia) "
-                        + "VALUES (?,?,?,?,?,?,?)";
+                        + "VALUES (?,?,?,?,?,?,?,?)";
                 PreparedStatement stm = conn.prepareStatement(sql);
                 stm.setString(1, nuevo.getTitulo());
                 stm.setString(2, nuevo.getDescripcion());
@@ -95,6 +96,59 @@ public class JuegoDAO extends DAO {
             return null;
         }
         return juego;
+
+    }
+    
+    
+    public ArrayList<Juego> exportarTodosLosJuegos() {
+
+        ArrayList<Juego> juegos = new ArrayList();
+
+        try (Connection conn = conexion.conectar()) {
+
+            String sql = "SELECT * FROM juego";
+            PreparedStatement stm = conn.prepareStatement(sql);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                
+                Juego juego = new Juego();
+                
+
+                String costo = rs.getString("precio");
+                double precio = Double.parseDouble(costo);
+
+                String fecha = rs.getString("fecha_lanzamiento");
+                Date fecha_lanzamiento = Date.valueOf(fecha);
+
+                juego.setTitulo(rs.getString("titulo"));
+                juego.setDescripcion(rs.getString("descripcion"));
+                juego.setPrecio(precio);
+                juego.setFecha_lanzamiento(fecha_lanzamiento);
+                juego.setClasificacion(TipoClasificacion.valueOf(rs.getString("clasificacion")));
+
+                Blob blob = rs.getBlob("multimedia");
+                if (blob != null) {
+                    // Convertir el Blob en un arreglo de bytes
+                    byte[] bytesImagen = blob.getBytes(1, (int) blob.length());
+
+                    // Convertir esos bytes a una cadena Base64
+                    String imagen64 = Base64.getEncoder().encodeToString(bytesImagen);
+
+                    // Guardarlo en el objeto
+                    juego.setMultimedia(imagen64);
+                }
+                juegos.add(juego);
+            }
+            
+            return juegos;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        return null;
 
     }
 
