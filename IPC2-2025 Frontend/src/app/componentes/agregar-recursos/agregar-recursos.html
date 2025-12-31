@@ -1,0 +1,21 @@
+<h3>Agregar los recursos minimos para: {{juego.titulo}}</h3>
+<form (ngSubmit)="guardarRecursos()">
+
+    <label>Almacenamiento: </label>
+    <input type="text" name="almacenamiento" [(ngModel)]="almacenamiento">
+    <br><br>
+
+    <label>RAM: </label>
+    <input type="text" name="ram" [(ngModel)]="ram">
+    <br><br>
+
+    <label>Procesador: </label>
+    <input type="text" name="procesador" [(ngModel)]="procesador">
+    <br><br>
+
+    <label>Sistema: </label>
+    <input type="text" name="sistema" [(ngModel)]="sistema">
+    <br><br>
+
+    <button type="submit">Guardar</button>
+</form>

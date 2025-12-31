@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Map;
 
 @WebServlet(name = "CompraServlet", urlPatterns = {"/CompraServlet"})
@@ -28,11 +29,11 @@ public class CompraServlet extends HttpServlet {
 
         Compra entrante = objectMapper.readValue(request.getInputStream(), Compra.class);
 
-        Compra compra = logicaU.obtenerCompra(entrante.getCorreo_usuario(), entrante.getTitulo());
+        ArrayList<Compra> compra = logicaU.obtenerCompra(entrante.getCorreo_usuario());
 
-        if (compra.getCorreo_usuario() == null) {
+        if (compra.isEmpty()) {
 
-            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener compra\"}");
+            response.getWriter().print("{\"status\":\"error\",\"mensaje\":\" Ocurrio un error al obtener compras\"}");
 
         } else {
             String json = objectMapper.writeValueAsString(compra);

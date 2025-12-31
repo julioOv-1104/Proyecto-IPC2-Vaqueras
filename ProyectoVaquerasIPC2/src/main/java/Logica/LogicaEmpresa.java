@@ -2,6 +2,7 @@ package Logica;
 
 import DAOs.*;
 import Entidades.*;
+import java.util.ArrayList;
 
 public class LogicaEmpresa {
 
@@ -49,6 +50,12 @@ public class LogicaEmpresa {
     public Empresa obtenerEmpresa(String empresa){
     
         return empresaDAO.exportarEmpresa(empresa);
+        
+    }
+    
+     public ArrayList<Empresa> obtenerTodasEmpresaa(){
+    
+        return empresaDAO.exportarTodasEmpresas();
         
     }
     

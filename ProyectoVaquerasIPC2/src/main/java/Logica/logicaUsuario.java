@@ -4,6 +4,7 @@ import DAOs.*;
 import Entidades.*;
 import Utilidades.TipoUsuarioENUM;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class LogicaUsuario {
 
@@ -18,8 +19,8 @@ public class LogicaUsuario {
      return usuarioDAO.exportarUsuario(correo_usuario);
     }
     
-     public Compra obtenerCompra(String correo_usuario, String titulo){
-     return gamerDao.exportarCompra(correo_usuario, titulo);
+     public ArrayList<Compra> obtenerCompra(String correo_usuario){
+     return gamerDao.exportarCompra(correo_usuario);
     }
 
     public Usuario registrar(Usuario nuevo) {

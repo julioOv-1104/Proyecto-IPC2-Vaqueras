@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.*;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class GamerDAO extends DAO {
 
@@ -183,24 +184,29 @@ public class GamerDAO extends DAO {
     }
     
     
-    public Compra exportarCompra(String correo_usuario, String titulo){
+    public ArrayList<Compra> exportarCompra(String correo_usuario ){
     
 
-        Compra compra = new Compra();
+        ArrayList<Compra> compras = new ArrayList<>();
 
         try (Connection conn = conexion.conectar()) {
 
-            String sql = "SELECT * FROM compra WHERE correo_usuario = ? AND titulo = ?";
+            String sql = "SELECT * FROM compra WHERE correo_usuario = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, correo_usuario);
-            stm.setString(2, titulo);
 
             ResultSet rs = stm.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
+                
+                Compra compra = new Compra();
                 
                 String dinero = rs.getString("monto");
                 double monto = Double.parseDouble(dinero);
+                
+                String comision = rs.getString("porcentaje");
+                double porcentaje = Double.parseDouble(comision);
+                
                 String fecha = rs.getString("fecha_compra");
                 Date fecha_compra = Date.valueOf(fecha);
                 
@@ -208,15 +214,17 @@ public class GamerDAO extends DAO {
                 compra.setTitulo(rs.getString("titulo"));
                 compra.setMonto(monto);
                 compra.setFecha_compra(fecha_compra);
+                compra.setEstado(rs.getBoolean("estado"));
+                compra.setPorcentaje(porcentaje);
                 
-                return compra;
+                compras.add(compra);
                 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return compras;
         
     }
 

@@ -1,0 +1,33 @@
+<h1>Bienvenido la tienda de videojuegos de GameEshop</h1>
+
+
+
+<p>Numero de juegos: {{juegos.length }}</p>
+
+<div *ngIf="usuario">
+    <p>Bienvenido: {{usuario.nickname}}</p>
+    <p>Pais: {{usuario.pais}}</p>
+    <button (click) = "irArecargar()">Recargar cartera</button>
+    <button (click) = "logout()">Cerrar sesion</button>
+    <button (click)="irAbiblioteca()">Biblioteca</button>
+</div>
+
+
+<div class="grid">
+  <div class="card" *ngFor="let juego of juegos">
+    <img
+      *ngIf="juego.multimedia"
+      [src]="'data:image/jpeg;base64,' + juego.multimedia"
+      alt="Imagen del juego"
+    />
+
+    <h3>{{ juego.titulo }}</h3>
+    <p class="precio">${{ juego.precio }}</p>
+
+    <button (click)="comprar(juego)">Comprar</button><br>
+   <label>Fecha de compra</label> <br><input [(ngModel)]="fecha" type="date">
+  </div>
+</div>
+
+
+

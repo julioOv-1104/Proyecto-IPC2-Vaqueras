@@ -1,0 +1,27 @@
+<h2>Agrega categorias para {{juego.titulo}}</h2>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th >#</th>
+        <th>Categorías disponibles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let categoria of categorias; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ categoria.nombre_categoria }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div><br><br>
+
+
+<form>
+    <input [(ngModel)]="nuevaCategoria" name="nuevaCategoria" type="text" placeholder="categoria">
+    <button (click)="agregarCategoria()" >Agregar</button>
+</form>
+
+<button (click)="irArecursos()" >Agregar Recursos</button>

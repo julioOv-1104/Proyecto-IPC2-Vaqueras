@@ -12,6 +12,7 @@ public class Compra {
     private String titulo;
     private double monto;
     private double porcentaje;
+    private boolean estado;
     
      @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Mexico_City")
     private Date fecha_compra;
@@ -58,6 +59,16 @@ public class Compra {
     public void setFecha_compra(Date fecha_compra) {
         this.fecha_compra = fecha_compra;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    
     
     
     
