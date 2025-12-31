@@ -1,0 +1,31 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h1>Formulario de Registro Usuario Administrador</h1>
+    <form (ngSubmit)="RegistrarUsuarioAdmin()" >
+
+
+
+        <label for="password">Contraseña:</label>
+        <input  [(ngModel)]="contrasenna" type="password" id="password" name="password" required>
+        <br><br>
+
+
+        <label for="email">Correo:</label>
+        <input  [(ngModel)]="correo_usuario" type="email" id="email" name="email" required>
+        <br><br>
+
+        <button type="submit">Registrar Administrador</button>
+    </form>
+    <hr>
+    <button (click)="regresar()">Regresar</button>
+
+    <div *ngIf="mensajeError" style="color: red;">
+        {{ mensajeError }}
+    </div>
+</body>
+
+</html>

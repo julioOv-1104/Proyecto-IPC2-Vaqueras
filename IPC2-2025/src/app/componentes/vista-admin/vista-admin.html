@@ -1,0 +1,15 @@
+<h1>Vista de Administrador</h1>
+
+<button (click)="mostrarRegistroEmpresario()">Registrar usuario empresario</button>
+<button (click)="mostrarRegistroEmpresa()" >Registrar Empresa</button>
+<button (click) = "logout()">Cerrar sesion</button><br><br>
+<input [(ngModel)]="comision" type="number" name="comision" min="1">
+<button (click)="cambiarGlobal()" >Cambiar comision Global</button>
+
+<h3>Cambiar comision</h3>
+<div *ngFor="let empresa of empresas">
+
+    <h5>Cambiar para: {{ empresa.nombre_empresa }}</h5>
+    <input [(ngModel)]="comision" type="number" name="comision" min="1">
+    <button (click)="cambiarEspecifica(empresa)"> Cambiar</button>
+  </div>
